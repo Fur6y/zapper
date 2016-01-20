@@ -1,17 +1,29 @@
 {
   "name": "app-name",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "private": true,
   "description": "",
-  "main": "src/app/index.js",
-  "scripts": {
-    "dev": "",
-    "prod": "",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "Fabian Fetting <mail@fabianfetting.de> (https://github.com/Fur6y)",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": ""
   },
-  "author": "Fabian Fetting <mail@fabianfetting.de> (https://github.com/Fur6y)",
-  "license": "MIT"
+  "main": "src/app/index.js",
+  "scripts": {
+    "dev": "gulp && open -n -a \"Google Chrome\" --args --load-and-launch-app=$PWD/bin",
+    "hot": "node dev-server/server",
+    "prod": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "react": "0.14.6"
+  },
+  "devDependencies": {
+    "gulp": "3.9.0",
+    "gulp-rename": "^1.2.2",
+    "require-dir": "0.3.0",
+    "webpack": "1.12.10",
+    "webpack-dev-server": "1.14.0"
+  }
 }
