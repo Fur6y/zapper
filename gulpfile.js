@@ -11,5 +11,5 @@ gulp.task('default', [
     'copy:fonts',
     'copy:i18n',
     'copy:background',
-    'copy:style'
+    'copy:css'
 ]);
