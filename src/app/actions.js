@@ -21,10 +21,10 @@ export function discoverTv() {
     }
 }
 
-export function foundTv(location) {
-    console.log('found tv')
+export function updateLocation(location) {
+    console.log('update location', location)
     return {
-        type: C.FOUND_TV,
+        type: C.UPDATE_LOCATION,
         location
     }
 }
@@ -54,7 +54,7 @@ export default {
     connect,
     disconnect,
     discoverTv,
-    foundTv,
+    updateLocation,
     abortDiscoverTv,
     uiShowSettings,
     uiCloseSettings

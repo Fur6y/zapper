@@ -28,7 +28,8 @@ export default function (state = initialState, action) {
                 isDiscoveringTv: false
             });
 
-        case C.FOUND_TV:
+        case C.UPDATE_LOCATION:
+            if(state.connection.location === action.location) { return; }
             return Object.assign({}, state, {
                 isDiscoveringTv: false,
                 connection: Object.assign({}, state.connection, {
