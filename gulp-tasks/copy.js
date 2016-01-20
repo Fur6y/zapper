@@ -29,10 +29,7 @@ gulp.task('copy:i18n', ['clean:bin'], function() {
 });
 
 gulp.task('copy:css', ['clean:bin'], function() {
-   gulp.src('./src/style.css')
-   .pipe(gulp.dest(targetFolder));
-
-   gulp.src('./src/font.css')
+   gulp.src('./src/style/**/*.css')
    .pipe(gulp.dest(targetFolder));
 });
 
