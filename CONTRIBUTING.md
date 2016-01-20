@@ -4,7 +4,7 @@
 
 ```bash
 npm install
-git flow init # default settings
+git flow init # with default settings
 ```
 
 ## Development
@@ -17,9 +17,6 @@ npm run dev
 
 - *Dev*
  - [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension)
- - [redux-notify](https://github.com/zalmoxisus/redux-notify)
- - [crossmessaging](https://github.com/zalmoxisus/crossmessaging)
- - [chrome-storage-local](https://github.com/zalmoxisus/chrome-storage-local)
 
 - *App*
  - [react](https://github.com/facebook/react)
