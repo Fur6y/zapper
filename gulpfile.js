@@ -8,7 +8,6 @@ gulp.task('default', [
     'copy:manifest',
     'copy:html',
     'copy:img',
-    'copy:fonts',
     'copy:i18n',
     'copy:background',
     'copy:css'

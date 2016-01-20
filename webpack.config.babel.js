@@ -1,5 +1,7 @@
-var webpack = require('webpack');
 var path = require('path');
+var webpack = require('webpack');
+// production:
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 process.env.NODE_ENV = 'development';
 
@@ -20,7 +22,9 @@ module.exports = {
     new webpack.DefinePlugin({
       VERSION: JSON.stringify('0.1.0'),
       __DEV__: JSON.stringify(true)
-    })
+    }),
+    // production:
+    // new ExtractTextPlugin('[name].css')
   ],
   module: {
     loaders: [
@@ -30,8 +34,15 @@ module.exports = {
         include: path.join(__dirname, 'src')
       },
       {
-        test: /\.css?$/,
-        loaders: ['style', 'raw']
+        test: /\.sass$/,
+        // production:
+        // loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap&indentedSyntax=sass'),
+        loaders: ['style', 'css?sourceMap', 'sass?sourceMap&indentedSyntax=sass'],
+        include: path.join(__dirname, 'src/style')
+      },
+      {
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: 'file-loader'
       }
     ]
   }

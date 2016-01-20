@@ -18,11 +18,6 @@ gulp.task('copy:img', ['clean:bin'], function() {
    .pipe(gulp.dest(targetFolder+'img/'));
 });
 
-gulp.task('copy:fonts', ['clean:bin'], function() {
-    gulp.src('./src/assets/fonts/**/*')
-    .pipe(gulp.dest(targetFolder+'fonts/'));
-});
-
 gulp.task('copy:i18n', ['clean:bin'], function() {
    gulp.src('./src/i18n/**/*')
    .pipe(gulp.dest(targetFolder+'_locales/'));
