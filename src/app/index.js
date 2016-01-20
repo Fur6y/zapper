@@ -1,8 +1,14 @@
 import '../style/main.sass'
-import other from './other'
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 
-var helloWorld = window.helloWorld = function() {
-    console.log('hello world');
-};
+import store from './store'
+import ControllerApp from './app'
 
-helloWorld();
+render(
+    <Provider store={store}>
+        <ControllerApp />
+    </Provider>,
+    document.getElementById('root')
+)

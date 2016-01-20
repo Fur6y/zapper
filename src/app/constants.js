@@ -1,0 +1,7 @@
+export const CONNECT = 'CONNECT';
+export const DISCONNECT = 'DISCONNECT';
+export const DISCOVER_TV = 'DISCOVER_TV';
+export const ABORT_DISCOVER_TV = 'ABORT_DISCOVER_TV';
+export const FOUND_TV = 'FOUND_TV';
+export const UI_SHOW_SETTINGS = 'UI_SHOW_SETTINGS';
+export const UI_CLOSE_SETTINGS = 'UI_CLOSE_SETTINGS';

@@ -23,11 +23,6 @@ gulp.task('copy:i18n', ['clean:bin'], function() {
    .pipe(gulp.dest(targetFolder+'_locales/'));
 });
 
-gulp.task('copy:css', ['clean:bin'], function() {
-   gulp.src('./src/style/**/*.css')
-   .pipe(gulp.dest(targetFolder));
-});
-
 gulp.task('copy:background', ['clean:bin'], function() {
    gulp.src('./src/background/index.js')
    .pipe(rename('background.js'))

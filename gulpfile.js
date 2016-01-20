@@ -9,6 +9,5 @@ gulp.task('default', [
     'copy:html',
     'copy:img',
     'copy:i18n',
-    'copy:background',
-    'copy:css'
+    'copy:background'
 ]);

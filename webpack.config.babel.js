@@ -1,7 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
-// production:
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 process.env.NODE_ENV = 'development';
 
@@ -14,8 +13,7 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.join(__dirname, 'bin/bundle'),
-    publicPath: '/bundle/'
+    path: path.join(__dirname, 'bin/bundle')
   },
   plugins: [
     new webpack.optimize.DedupePlugin(),
@@ -23,8 +21,7 @@ module.exports = {
       VERSION: JSON.stringify('0.1.0'),
       __DEV__: JSON.stringify(true)
     }),
-    // production:
-    // new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('[name].css')
   ],
   module: {
     loaders: [
@@ -35,9 +32,9 @@ module.exports = {
       },
       {
         test: /\.sass$/,
-        // production:
-        // loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap&indentedSyntax=sass'),
-        loaders: ['style', 'css?sourceMap', 'sass?sourceMap&indentedSyntax=sass'],
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap&indentedSyntax=sass'),
+        // cause an error with loading fonts on chrome
+        // loaders: ['style', 'css?sourceMap', 'sass?sourceMap&indentedSyntax=sass'],
         include: path.join(__dirname, 'src/style')
       },
       {
