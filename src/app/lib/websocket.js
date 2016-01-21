@@ -5,15 +5,26 @@ export default {
     _config: {
         port: '3000',
         address: 'localhost',
-        scheme: 'wss'
+        scheme: 'wss',
+        pairingKey: null,
+        pairingKeyCallback: null
     },
     _socket: null,
     _onOpen: function(e) {
-        // let pairing = getPairing('key');
-        // _this.socket.send(JSON.stringify(pairing));
+        let pairingMessage = getPairing(this._config.pairingKey);
+        this._socket.emit(JSON.stringify(pairingMessage));
     },
     _onMessage: function(e) {
-        console.log('websocket message', JSON.parse(e.data));
+        let response = JSON.parse(e.data);
+        console.log('websocket message', response);
+
+        if(response.type === 'registered' && response.payload['client-key'] && this._config.pairingKey !== response.payload['client-key']) {
+            this._config.pairingKey = response.payload['client-key'];
+            if(this._config.pairingKeyCallback) {
+                this._config.pairingKeyCallback(this._config.pairingKey);
+            }
+        }
+
     },
     _onError: function(e) {
         console.warn('websocket error', e);
@@ -38,18 +49,15 @@ export default {
         this._socket.on('message', (e) => this._onMessage(e));
         this._socket.on('close', (e) => this._onClose(e));
 
-        // add chrome app closing listener
-        if(chrome && chrome.runtime && chrome.runtime.onSuspend) {
-            chrome.runtime.onSuspend.addListener(() => function() {
-                this._socket.close();
-            });
-        }
-
         return this._socket;
+    },
+    reconnect: function() {
+        this._socket.reconnect();
     },
     close: function() {
         if(this._socket) {
             this._socket.close();
+            this._socket = null;
         }
     }
 }

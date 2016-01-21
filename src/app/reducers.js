@@ -2,7 +2,7 @@ import initialState from './initialState'
 import * as C from './constants'
 
 export default function (state = initialState, action) {
-    
+
     let changeReadyState = function(state, newReadyState) {
         return Object.assign({}, state, {
             connection: Object.assign({}, state.connection, {
@@ -43,6 +43,14 @@ export default function (state = initialState, action) {
             return Object.assign({}, state, {
                 connection: Object.assign({}, state.connection, {
                     location: action.location
+                })
+            });
+
+        case C.UPDATE_PAIRING_KEY:
+            if(state.connection.pairingKey === action.pairingKey) { return state; }
+            return Object.assign({}, state, {
+                connection: Object.assign({}, state.connection, {
+                    pairingKey: action.pairingKey
                 })
             });
 

@@ -30,7 +30,7 @@ export default class App extends React.Component {
             content = (
                 <div>
                     <RaisedButton style={{ margin: '0 20px 10px 0' }} label="Abort" onClick={(e) => { this.abortDiscoverTv(e) }} />
-                    <span>Suche TV ...</span>
+                    <span>Searching tv ...</span>
                     <LinearProgress mode="indeterminate"/>
                     <DeviceList discoveredDevices={this.props.discoveredDevices} actions={this.props.actions} />
                 </div>

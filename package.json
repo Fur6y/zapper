@@ -19,6 +19,7 @@
   "dependencies": {
     "browser-websocket": "0.0.8",
     "chrome-dgram": "^2.1.7",
+    "crypto-js": "^3.1.6",
     "material-ui": "^0.14.2",
     "react": "0.14.6",
     "react-dom": "^0.14.6",

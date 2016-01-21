@@ -7,8 +7,16 @@ import CastButton from './components/castButton'
 import SettingButton from './components/settingButton'
 import AppSnackbar from './components/appSnackbar'
 import Settings from './components/settings/settings'
+import RemoteController from './components/remoteController'
 
 let ControllerApp = class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        // on app start
+        props.actions.readLocation();
+        props.actions.readPairingKey();
+    }
 
     render() {
         let showSettings = this.props.ui.settings;
@@ -20,7 +28,7 @@ let ControllerApp = class App extends React.Component {
                     {
                         showSettings ?
                         <Settings actions={this.props.actions} isDiscoveringTv={this.props.isDiscoveringTv} discoveredDevices={this.props.discoveredDevices} connection={this.props.connection} /> :
-                        <div style={{ margin: '0 auto', marginTop: 50, width: 200, height: 500, background: 'lightgrey' }}>Remote Controller</div>
+                        <RemoteController actions={this.props.actions} />
                     }
                 </div>
                 { showSettings ? '' : <SettingButton actions={this.props.actions} /> }

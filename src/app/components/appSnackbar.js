@@ -37,14 +37,16 @@ export default class App extends React.Component {
             case 1: message = 'Connected'; break;
             case 2: message = 'Disconnecting ...'; break;
             case 3: message = 'Disconnected'; break;
-            default: message = 'Error';
+            default: message = '';
         }
+
+        let stay = this.props.connection.readyState === 0 || this.props.connection.readyState === 2;
 
         return (
             <Snackbar
               open={this.connectionStateChanged()}
               message={message}
-              autoHideDuration={3000}
+              autoHideDuration={stay ? 0 : 3000}
               onRequestClose={this.handleRequestClose.bind(this)}
             />
         )

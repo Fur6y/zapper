@@ -1,7 +1,7 @@
 export default {
     connection: {
         type: 'ws',
-        location: 'lgsmarttv.lan',
+        location: null,
         port: '3000',
         pairingKey: null,
         deviceName: '',

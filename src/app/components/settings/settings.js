@@ -30,7 +30,6 @@ export default class App extends React.Component {
 
     handleSaveButtonClick(e) {
         let location = this.refs['ipInput'].getValue()
-        console.log('save ip', location)
         this.props.actions.saveLocation(location);
         this.props.actions.uiCloseSettings();
     }

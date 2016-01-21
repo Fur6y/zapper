@@ -1,28 +1,72 @@
 import * as C from './constants'
 import ssdp from './lib/ssdp'
 import websocket from './lib/websocket'
+import keychain from './lib/keychain'
 
 export function openConnection() {
     return (dispatch, getState) => {
         let state = getState();
 
-        let socket = websocket.open({
+        // check smart tv address available
+        if(!state.connection.location) { return; }
+
+        let socketOptions = {
             scheme: state.connection.type,
             address: state.connection.location,
-            port: state.connection.port
-        });
+            port: state.connection.port,
+            pairingKey: state.connection.pairingKey
+        }
+
+        // add pairing key callback
+        // if no pairing key exists
+        if(!state.connection.pairingKey) {
+            socketOptions.pairingKeyCallback = function(pairingKey) {
+                dispatch(savePairingKey(pairingKey));
+            }
+        }
+
+        let socket = websocket.open(socketOptions);
 
         dispatch(connecting());
 
-        socket.on('open', function() {
+        let onOpen = function() {
             dispatch(connected());
-        });
-
-        socket.on('close', function() {
+        };
+        let onClose = function() {
             dispatch(disconnected());
-            socket.off('open');
-            socket.off('close');
-        });
+            socket.off('open', onOpen);
+            socket.off('close', onClose);
+        };
+
+        socket.on('open', onOpen);
+        socket.on('close', onClose);
+    }
+}
+
+export function readPairingKey() {
+    return (dispatch, getState) => {
+        keychain.readDecrypted('pairingKey')
+        .then(function(pairingKey) {
+            dispatch(updatePairingKey(pairingKey));
+        })
+        .catch(function() {
+            console.debug('no pairing key');
+        })
+    }
+}
+
+export function savePairingKey(pairingKey) {
+    return (dispatch, getState) => {
+        keychain.persistEncrypted('pairingKey', pairingKey);
+        dispatch(updatePairingKey(pairingKey));
+    }
+}
+
+export function updatePairingKey(pairingKey) {
+    console.log('update pairing key', pairingKey)
+    return {
+        type: C.UPDATE_PAIRING_KEY,
+        pairingKey
     }
 }
 
@@ -50,7 +94,7 @@ export function connected() {
 }
 
 export function disconnecting() {
-    console.log('disconnected')
+    console.log('disconnecting')
     return {
         type: C.DISCONNECTING,
         readyState: 2
@@ -74,12 +118,6 @@ export function startDiscover() {
 
 export function discoverTv() {
     return (dispatch, getState) => {
-        if(chrome && chrome.runtime && chrome.runtime.onSuspend) {
-            chrome.runtime.onSuspend.addListener(function() {
-                ssdp.abort();
-            });
-        }
-
         ssdp.discover(function(device) {
             dispatch(foundTv(device));
         });
@@ -98,6 +136,7 @@ export function foundTv(device) {
 
 export function saveLocation(location) {
     return (dispatch, getState) => {
+        keychain.persist('address', location);
         dispatch(updateLocation(location));
 
         let state = getState();
@@ -105,6 +144,18 @@ export function saveLocation(location) {
         if(isConnected) {
             dispatch(closeConnection());
         }
+    }
+}
+
+export function readLocation() {
+    return (dispatch, getState) => {
+        keychain.read('address')
+        .then(function(location) {
+            dispatch(updateLocation(location));
+        })
+        .catch(function() {
+            console.debug('no address');
+        });
     }
 }
 
@@ -141,9 +192,16 @@ export function uiCloseSettings() {
 export default {
     openConnection,
     closeConnection,
+
     discoverTv,
-    saveLocation,
     abortDiscoverTv,
+
+    saveLocation,
+    readLocation,
+
+    savePairingKey,
+    readPairingKey,
+
     uiShowSettings,
     uiCloseSettings
 }
