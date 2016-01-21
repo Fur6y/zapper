@@ -31,7 +31,7 @@ export default class App extends React.Component {
     handleSaveButtonClick(e) {
         let location = this.refs['ipInput'].getValue()
         console.log('save ip', location)
-        this.props.actions.updateLocation(location);
+        this.props.actions.saveLocation(location);
         this.props.actions.uiCloseSettings();
     }
 
@@ -41,7 +41,7 @@ export default class App extends React.Component {
         return (
             <div style={style}>
                 <div style={{width: 276, margin: '0 auto'}}>
-                    <h1 style={{ margin: '20px 0' }}>Einstellungen</h1>
+                    <h1 style={{ margin: '20px 0' }}>Settings</h1>
                     <Discover actions={this.props.actions} style={cardStyle} connection={this.props.connection} isDiscoveringTv={this.props.isDiscoveringTv} discoveredDevices={this.props.discoveredDevices} />
                     { isDiscoveringTv ? '' : (<IpSetting ref="ipInput" location={this.props.connection.location} style={cardStyle} />) }
                     { isDiscoveringTv ? '' : (

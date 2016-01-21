@@ -1,5 +1,7 @@
-export const CONNECT = 'CONNECT';
-export const DISCONNECT = 'DISCONNECT';
+export const CONNECTING = 'CONNECTING';
+export const CONNECTED = 'CONNECTED';
+export const DISCONNECTING = 'DISCONNECTING';
+export const DISCONNECTED = 'DISCONNECTED';
 export const DISCOVER_TV = 'DISCOVER_TV';
 export const FOUND_TV = 'FOUND_TV';
 export const ABORT_DISCOVER_TV = 'ABORT_DISCOVER_TV';

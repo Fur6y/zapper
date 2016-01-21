@@ -15,14 +15,15 @@ export default class App extends React.Component {
     }
 
     connectionStateChanged() {
-        if(typeof this.currentConnectionState === 'undefined') {
-            this.currentConnectionState = this.props.connection.isEstablished;
+        if(typeof this.currentReadyState === 'undefined') {
+            // it's app start, don't show snackbar
+            this.currentReadyState = this.props.connection.readyState;
         }
 
-        let previousConnectionState = this.currentConnectionState;
-        this.currentConnectionState = this.props.connection.isEstablished;
+        let previousReadyState = this.currentReadyState;
+        this.currentReadyState = this.props.connection.readyState;
 
-        return previousConnectionState != this.props.connection.isEstablished;
+        return previousReadyState !== this.props.connection.readyState;
     }
 
     shouldComponentUpdate() {
@@ -30,7 +31,14 @@ export default class App extends React.Component {
     }
 
     render() {
-        let message = this.props.connection.isEstablished ? 'Verbunden mit ...' : 'Verbindung getrennt';
+        let message;
+        switch(this.props.connection.readyState) {
+            case 0: message = 'Connecting ...'; break;
+            case 1: message = 'Connected'; break;
+            case 2: message = 'Disconnecting ...'; break;
+            case 3: message = 'Disconnected'; break;
+            default: message = 'Error';
+        }
 
         return (
             <Snackbar

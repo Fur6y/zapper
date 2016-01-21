@@ -7,7 +7,7 @@ let itemStyle = { display: 'block', width: '100%' };
 export default class App extends React.Component {
 
     handleDeviceClick(e, device) {
-        this.props.actions.updateLocation(device.address);
+        this.props.actions.savesLocation(device.address);
         this.props.actions.abortDiscoverTv();
     }
 

@@ -1,17 +1,67 @@
 import * as C from './constants'
 import ssdp from './lib/ssdp'
+import websocket from './lib/websocket'
 
-export function connect() {
-    console.log('connecting')
-    return {
-        type: C.CONNECT
+export function openConnection() {
+    return (dispatch, getState) => {
+        let state = getState();
+
+        let socket = websocket.open({
+            scheme: state.connection.type,
+            address: state.connection.location,
+            port: state.connection.port
+        });
+
+        dispatch(connecting());
+
+        socket.on('open', function() {
+            dispatch(connected());
+        });
+
+        socket.on('close', function() {
+            dispatch(disconnected());
+            socket.off('open');
+            socket.off('close');
+        });
     }
 }
 
-export function disconnect() {
-    console.log('disconnecting')
+export function closeConnection() {
+    return (dispatch, getState) => {
+        dispatch(disconnecting());
+        websocket.close();
+    }
+}
+
+export function connecting() {
+    console.log('connecting')
     return {
-        type: C.DISCONNECT
+        type: C.CONNECTING,
+        readyState: 0
+    }
+}
+
+export function connected() {
+    console.log('connected')
+    return {
+        type: C.CONNECTED,
+        readyState: 1
+    }
+}
+
+export function disconnecting() {
+    console.log('disconnected')
+    return {
+        type: C.DISCONNECTING,
+        readyState: 2
+    }
+}
+
+export function disconnected() {
+    console.log('disconnected')
+    return {
+        type: C.DISCONNECTED,
+        readyState: 3
     }
 }
 
@@ -46,6 +96,18 @@ export function foundTv(device) {
     }
 }
 
+export function saveLocation(location) {
+    return (dispatch, getState) => {
+        dispatch(updateLocation(location));
+
+        let state = getState();
+        let isConnected = state.connection.readyState === 0 || state.connection.readyState === 1;
+        if(isConnected) {
+            dispatch(closeConnection());
+        }
+    }
+}
+
 export function updateLocation(location) {
     console.log('update location', location)
     return {
@@ -77,10 +139,10 @@ export function uiCloseSettings() {
 }
 
 export default {
-    connect,
-    disconnect,
+    openConnection,
+    closeConnection,
     discoverTv,
-    updateLocation,
+    saveLocation,
     abortDiscoverTv,
     uiShowSettings,
     uiCloseSettings

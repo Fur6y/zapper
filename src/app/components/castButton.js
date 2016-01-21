@@ -12,17 +12,18 @@ var style = {
 export default class App extends Component {
 
     handleButtonClick(e) {
-        let isConnected = this.props.connection.isEstablished;
+        let isConnected = this.props.connection.readyState === 0 || this.props.connection.readyState === 1;
 
         if(isConnected) {
-            this.props.actions.disconnect()
+            this.props.actions.closeConnection()
         } else {
-            this.props.actions.connect()
+            this.props.actions.openConnection()
         }
     }
 
     render() {
-        let icon = this.props.connection.isEstablished ? 'cast_connected' : 'cast';
+        let isConnected = this.props.connection.readyState === 0 || this.props.connection.readyState === 1;
+        let icon = isConnected ? 'cast_connected' : 'cast';
         return (
             <div>
                 <FontIcon className="material-icons" style={style} onClick={this.handleButtonClick.bind(this)}>{icon}</FontIcon>
