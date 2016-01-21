@@ -4,7 +4,17 @@ import LinearProgress from 'material-ui/lib/linear-progress';
 import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
 
+import DeviceList from './deviceList';
+
 export default class App extends React.Component {
+
+    handleDiscoverButtonClick(e) {
+        this.props.actions.discoverTv();
+    }
+
+    abortDiscoverTv() {
+        this.props.actions.abortDiscoverTv();
+    }
 
     render() {
         let content;
@@ -12,19 +22,17 @@ export default class App extends React.Component {
             content = (
                 <div>
                     <div style={{ textAlign: 'center' }}>
-                        <RaisedButton label="discover tv" secondary={true} />
+                        <RaisedButton onClick={(e) => { this.handleDiscoverButtonClick(e) }} label="discover tv" secondary={true} />
                     </div>
                 </div>
             );
         } else {
             content = (
                 <div>
-                    <RaisedButton style={{ margin: '0 20px 10px 0' }} label="Abort" />
+                    <RaisedButton style={{ margin: '0 20px 10px 0' }} label="Abort" onClick={(e) => { this.abortDiscoverTv(e) }} />
                     <span>Suche TV ...</span>
                     <LinearProgress mode="indeterminate"/>
-                    <div style={{ textAlign: 'center', marginTop: '10' }}>
-                        <FlatButton label="TV1" secondary={true} style={{ display: 'block', width: '100%' }} />
-                    </div>
+                    <DeviceList discoveredDevices={this.props.discoveredDevices} actions={this.props.actions} />
                 </div>
             );
         }

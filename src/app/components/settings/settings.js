@@ -42,7 +42,7 @@ export default class App extends React.Component {
             <div style={style}>
                 <div style={{width: 276, margin: '0 auto'}}>
                     <h1 style={{ margin: '20px 0' }}>Einstellungen</h1>
-                    <Discover style={cardStyle} connection={this.props.connection} isDiscoveringTv={this.props.isDiscoveringTv} />
+                    <Discover actions={this.props.actions} style={cardStyle} connection={this.props.connection} isDiscoveringTv={this.props.isDiscoveringTv} discoveredDevices={this.props.discoveredDevices} />
                     { isDiscoveringTv ? '' : (<IpSetting ref="ipInput" location={this.props.connection.location} style={cardStyle} />) }
                     { isDiscoveringTv ? '' : (
                         <div style={buttonRowStyle}>

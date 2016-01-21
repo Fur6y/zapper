@@ -19,7 +19,7 @@ let ControllerApp = class App extends React.Component {
                 <div className="content">
                     {
                         showSettings ?
-                        <Settings actions={this.props.actions} isDiscoveringTv={this.props.isDiscoveringTv} connection={this.props.connection} /> :
+                        <Settings actions={this.props.actions} isDiscoveringTv={this.props.isDiscoveringTv} discoveredDevices={this.props.discoveredDevices} connection={this.props.connection} /> :
                         <div style={{ margin: '0 auto', marginTop: 50, width: 200, height: 500, background: 'lightgrey' }}>Remote Controller</div>
                     }
                 </div>

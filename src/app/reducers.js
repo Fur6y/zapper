@@ -20,7 +20,13 @@ export default function (state = initialState, action) {
 
         case C.DISCOVER_TV:
             return Object.assign({}, state, {
-                isDiscoveringTv: true
+                isDiscoveringTv: true,
+                discoveredDevices: []
+            });
+
+        case C.FOUND_TV:
+            return Object.assign({}, state, {
+                discoveredDevices: [...state.discoveredDevices, action.device]
             });
 
         case C.ABORT_DISCOVER_TV:
@@ -29,9 +35,8 @@ export default function (state = initialState, action) {
             });
 
         case C.UPDATE_LOCATION:
-            if(state.connection.location === action.location) { return; }
+            if(state.connection.location === action.location) { return state; }
             return Object.assign({}, state, {
-                isDiscoveringTv: false,
                 connection: Object.assign({}, state.connection, {
                     location: action.location
                 })

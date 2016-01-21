@@ -1,4 +1,5 @@
 import * as C from './constants'
+import ssdp from './lib/ssdp'
 
 export function connect() {
     console.log('connecting')
@@ -14,10 +15,34 @@ export function disconnect() {
     }
 }
 
-export function discoverTv() {
+export function startDiscover() {
     console.log('discovering')
     return {
         type: C.DISCOVER_TV
+    }
+}
+
+export function discoverTv() {
+    return (dispatch, getState) => {
+        if(chrome && chrome.runtime && chrome.runtime.onSuspend) {
+            chrome.runtime.onSuspend.addListener(function() {
+                ssdp.abort();
+            });
+        }
+
+        ssdp.discover(function(device) {
+            dispatch(foundTv(device));
+        });
+
+        dispatch(startDiscover());
+    }
+}
+
+export function foundTv(device) {
+    console.log('discovering', device)
+    return {
+        type: C.FOUND_TV,
+        device
     }
 }
 
@@ -31,6 +56,7 @@ export function updateLocation(location) {
 
 export function abortDiscoverTv() {
     console.log('abort discover tv')
+    ssdp.abort();
     return {
         type: C.ABORT_DISCOVER_TV
     }
