@@ -22,13 +22,13 @@ let ControllerApp = class App extends React.Component {
         let showSettings = this.props.ui.settings;
 
         return (
-            <div>
+            <div className="app">
                 { showSettings ? '' : <CastButton actions={this.props.actions} connection={this.props.connection} /> }
                 <div className="content">
                     {
                         showSettings ?
                         <Settings actions={this.props.actions} isDiscoveringTv={this.props.isDiscoveringTv} discoveredDevices={this.props.discoveredDevices} connection={this.props.connection} /> :
-                        <RemoteController actions={this.props.actions} />
+                        <RemoteController actions={this.props.actions} connection={this.props.connection} />
                     }
                 </div>
                 { showSettings ? '' : <SettingButton actions={this.props.actions} /> }

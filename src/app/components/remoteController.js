@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import FontIcon from 'material-ui/lib/font-icon';
+
+import websocket from '../lib/websocket'
+import Shortcuts from '../shortcuts'
 
 let style = {
-    margin: '0 auto',
-    marginTop: 50,
-    width: 200,
-    height: 500,
     background: 'lightgrey'
 };
 
@@ -14,20 +12,65 @@ let buttonStyle = {
     height: 40,
     width: 40,
     margin: 5,
-    backgroundColor: 'grey'
+    backgroundColor: 'grey',
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 500
 }
 
 export default class App extends Component {
 
-    handleButtonClick(e) {
-        console.log('do something')
+    constructor(props) {
+        super(props);
+
+        this.shortcuts = new Shortcuts({
+            up: () => { this.handleVolumeUpButtonClick() },
+            down: () => { this.handleVolumeDownButtonClick() },
+            right: () => { this.channelUp() },
+            left: () => { this.channelDown() }
+        });
+    }
+
+    componentWillUnmount() {
+        this.shortcuts.remove();
+    }
+
+    channelUp() {
+        if(this.props.connection.readyState === WebSocket.OPEN) {
+            websocket.channelUp();
+        }
+    }
+
+    channelDown() {
+        if(this.props.connection.readyState === WebSocket.OPEN) {
+            websocket.channelDown();
+        }
+    }
+
+    handleVolumeUpButtonClick(e) {
+        if(this.props.connection.readyState === WebSocket.OPEN) {
+            websocket.volumeUp();
+        }
+    }
+
+    handleVolumeDownButtonClick(e) {
+        if(this.props.connection.readyState === WebSocket.OPEN) {
+            websocket.volumeDown();
+        }
+    }
+
+    handleKeyDown(e) {
+        console.debug(e);
     }
 
     render() {
         return (
-            <div style={style}>
-                <div>Remote Controller</div>
-                <div style={buttonStyle} onClick={() => {this.handleButtonClick()}}>Volume Up</div>
+            <div className="remote-controller" style={style}>
+                <div className="remote-controller-inner">
+                    <div>Remote Controller</div>
+                    <div style={buttonStyle} onClick={(e) => {this.handleVolumeUpButtonClick(e)}}>Volume +</div>
+                    <div style={buttonStyle} onClick={(e) => {this.handleVolumeDownButtonClick(e)}}>Volume –</div>
+                </div>
             </div>
         );
     }
