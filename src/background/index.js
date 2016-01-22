@@ -1,6 +1,6 @@
 chrome.app.runtime.onLaunched.addListener(function() {
     chrome.app.window.create('index.html', {
-        id: 'appId',
+        id: 'zapperAppId',
         width: 400,
         height: 750,
         minWidth: 150,
