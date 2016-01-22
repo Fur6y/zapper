@@ -6,8 +6,10 @@
     "default_locale": "en",
     "icons": {
         "16": "img/app/16x16.png",
+        "32": "img/app/32x32.png",
         "48": "img/app/48x48.png",
-        "128": "img/app/128x128.png"
+        "128": "img/app/128x128.png",
+        "256": "img/app/256x256.png"
     },
     "app": {
         "background": {
