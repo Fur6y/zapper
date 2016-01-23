@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 export default class RemoteControlCenterButton extends Component {
     render() {
-        let buttonWrapperClassName = `button-wrapper ${this.props.type}-button button-black`;
+        let buttonWrapperClassName = `button-wrapper ${this.props.type}-button`;
         let buttonClassName = `button-center-${this.props.buttonType} button-${this.props.color}`;
 
         let buttonMarkup = (button, i) => {

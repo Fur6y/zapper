@@ -3,7 +3,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
         id: 'zapperAppId',
         width: 210,
         height: 800,
-        minWidth: 150,
-        minHeight: 600
+        minWidth: 200,
+        minHeight: 760
     });
 });
