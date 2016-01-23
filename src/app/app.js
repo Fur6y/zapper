@@ -7,7 +7,7 @@ import CastButton from './components/castButton'
 import SettingButton from './components/settingButton'
 import AppSnackbar from './components/appSnackbar'
 import Settings from './components/settings/settings'
-import RemoteController from './components/remoteController'
+import RemoteControl from './components/remoteControl'
 
 let ControllerApp = class App extends React.Component {
 
@@ -28,7 +28,7 @@ let ControllerApp = class App extends React.Component {
                     {
                         showSettings ?
                         <Settings actions={this.props.actions} isDiscoveringTv={this.props.isDiscoveringTv} discoveredDevices={this.props.discoveredDevices} connection={this.props.connection} /> :
-                        <RemoteController actions={this.props.actions} connection={this.props.connection} />
+                        <RemoteControl actions={this.props.actions} connection={this.props.connection} />
                     }
                 </div>
                 { showSettings ? '' : <SettingButton actions={this.props.actions} /> }
