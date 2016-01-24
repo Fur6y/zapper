@@ -15,10 +15,12 @@ export default class RemoteController extends Component {
         super(props);
 
         this.shortcuts = new Shortcuts({
-            up: () => { this.handleVolumeUpButtonClick() },
-            down: () => { this.handleVolumeDownButtonClick() },
-            right: () => { this.channelUp() },
-            left: () => { this.channelDown() }
+            'up': () => { this.handleVolumeUpButtonClick() },
+            'down': () => { this.handleVolumeDownButtonClick() },
+            'right': () => { this.channelUp() },
+            'left': () => { this.channelDown() },
+            '1': () => { this.channelDown() },
+            'num1': () => { this.channelDown() }
         });
     }
 
