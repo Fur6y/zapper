@@ -31,17 +31,16 @@ export default class App extends React.Component {
         let message;
 
         switch(this.props.connection.readyState) {
-            case 0: message = 'Connecting ...'; break;
-            case 1: message = 'Connected'; break;
-            case 2: message = 'Disconnecting ...'; break;
-            case 3: message = 'Disconnected'; break;
+            case 0: message = chrome.i18n.getMessage('connecting'); break;
+            case 1: message = chrome.i18n.getMessage('connected'); break;
+            case 2: message = chrome.i18n.getMessage('disconnecting'); break;
+            case 3: message = chrome.i18n.getMessage('disconnected'); break;
             default: message = '';
         }
 
         if(!!this.props.connection.error) {
             switch(this.props.connection.error) {
-                case E.NO_CONNECTION: message = 'No connection'; break;
-                default: message = 'Unkown error';
+                case E.NO_CONNECTION: message = chrome.i18n.getMessage('errorNoConnection'); break;
             }
         }
 

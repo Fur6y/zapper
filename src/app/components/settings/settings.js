@@ -40,13 +40,13 @@ export default class App extends React.Component {
         return (
             <div style={style}>
                 <div style={{minWidth: 190, maxWidth: 276, margin: '0 auto'}}>
-                    <h1 style={{ margin: '20px 0' }}>Settings</h1>
+                    <h1 style={{ margin: '20px 0' }}>{chrome.i18n.getMessage('settingsTitle')}</h1>
                     <Discover actions={this.props.actions} style={cardStyle} connection={this.props.connection} isDiscoveringTv={this.props.isDiscoveringTv} discoveredDevices={this.props.discoveredDevices} />
                     { isDiscoveringTv ? '' : (<IpSetting ref="ipInput" location={this.props.connection.location} style={cardStyle} />) }
                     { isDiscoveringTv ? '' : (
                         <div style={buttonRowStyle}>
-                            <RaisedButton label="Cancel" onClick={ (e) => this.handleCancelButtonClick(e) } />
-                            <RaisedButton primary={true} label="Save" onClick={ (e) => this.handleSaveButtonClick(e) } style={{ float: 'right' }} />
+                            <RaisedButton label={chrome.i18n.getMessage('settingsCancelButton')} onClick={ (e) => this.handleCancelButtonClick(e) } />
+                            <RaisedButton primary={true} label={chrome.i18n.getMessage('settingsSaveButton')} onClick={ (e) => this.handleSaveButtonClick(e) } style={{ float: 'right' }} />
                         </div>
                     ) }
                 </div>

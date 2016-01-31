@@ -14,7 +14,7 @@ export default class App extends React.Component {
                 <TextField
                     ref="input"
                     hintText="000.000.000.000"
-                    floatingLabelText="IP address or host name"
+                    floatingLabelText={chrome.i18n.getMessage('networkAddressInput')}
                     defaultValue={this.props.location} />
             </Card>
         );
