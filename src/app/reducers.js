@@ -3,24 +3,35 @@ import * as C from './constants'
 
 export default function (state = initialState, action) {
 
-    let changeReadyState = function(state, newReadyState) {
+    let changeReadyState = function(state, newReadyState, resetErrorCode) {
+        let newProps;
+        if(resetErrorCode) {
+            newProps = { readyState: newReadyState, errorCode: null }
+        } else {
+            newProps = { readyState: newReadyState }
+        }
         return Object.assign({}, state, {
-            connection: Object.assign({}, state.connection, {
-                readyState: newReadyState
-            })
+            connection: Object.assign({}, state.connection, newProps)
         });
     };
 
     switch(action.type) {
 
         case C.CONNECTING:
-            return changeReadyState(state, action.readyState)
+            return changeReadyState(state, action.readyState, true)
         case C.CONNECTED:
             return changeReadyState(state, action.readyState)
         case C.DISCONNECTING:
             return changeReadyState(state, action.readyState)
         case C.DISCONNECTED:
             return changeReadyState(state, action.readyState)
+
+        case C.ADD_ERROR:
+            return Object.assign({}, state, {
+                connection: Object.assign({}, state.connection, {
+                    error: action.error
+                })
+            });
 
         case C.DISCOVER_TV:
             return Object.assign({}, state, {

@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
-import Snackbar from 'material-ui/lib/snackbar';
+import React, { PropTypes } from 'react'
+import Snackbar from 'material-ui/lib/snackbar'
+import * as E from '../error'
 
 export default class App extends React.Component {
 
@@ -10,11 +11,7 @@ export default class App extends React.Component {
         };
     }
 
-    handleRequestClose() {
-        this.setState({ open: false });
-    }
-
-    connectionStateChanged() {
+    connectionStateChanged(props) {
         if(typeof this.currentReadyState === 'undefined') {
             // it's app start, don't show snackbar
             this.currentReadyState = this.props.connection.readyState;
@@ -26,12 +23,13 @@ export default class App extends React.Component {
         return previousReadyState !== this.props.connection.readyState;
     }
 
-    shouldComponentUpdate() {
-        return true;
+    shouldComponentUpdate(props) {
+        return !!props.connection.error || this.connectionStateChanged(props);
     }
 
-    render() {
+    getSnackbarMessage() {
         let message;
+
         switch(this.props.connection.readyState) {
             case 0: message = 'Connecting ...'; break;
             case 1: message = 'Connected'; break;
@@ -40,14 +38,25 @@ export default class App extends React.Component {
             default: message = '';
         }
 
-        let stay = this.props.connection.readyState === 0 || this.props.connection.readyState === 2;
+        if(!!this.props.connection.error) {
+            switch(this.props.connection.error) {
+                case E.NO_CONNECTION: message = 'No connection'; break;
+                default: message = 'Unkown error';
+            }
+        }
+
+        return message;
+    }
+
+    render() {
+        let stay = !this.props.connection.error && (this.props.connection.readyState === 0 || this.props.connection.readyState === 2);
 
         return (
             <Snackbar
-              open={this.connectionStateChanged()}
-              message={message}
+              open={this.connectionStateChanged(this.props) ? true : false}
+              message={this.getSnackbarMessage()}
               autoHideDuration={stay ? 0 : 3000}
-              onRequestClose={this.handleRequestClose.bind(this)}
+              onRequestClose={() => { this.setState({ open: false }) }}
             />
         )
     }

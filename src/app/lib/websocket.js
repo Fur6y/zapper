@@ -53,8 +53,9 @@ export default {
         this._config = Object.assign(this._config, config);
 
         // create websocket
+        let debug = __DEV__;
         let {scheme, address, port} = this._config;
-        this._socket = new WS(`${scheme}://${address}:${port}`);
+        this._socket = new WS(`${scheme}://${address}:${port}`, debug);
 
         // add listener
         this._socket.on('open', (e) => this._onOpen(e));

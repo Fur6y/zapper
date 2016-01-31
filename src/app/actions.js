@@ -1,4 +1,5 @@
 import * as C from './constants'
+import * as E from './error'
 import ssdp from './lib/ssdp'
 import websocket from './lib/websocket'
 import keychain from './lib/keychain'
@@ -32,14 +33,27 @@ export function openConnection() {
         let onOpen = function() {
             dispatch(connected());
         };
-        let onClose = function() {
+        let onError = function() {
+            dispatch(connectionError(E.NO_CONNECTION));
+        };
+        let onClose = function(e) {
             dispatch(disconnected());
             socket.off('open', onOpen);
+            socket.off('error', onError);
             socket.off('close', onClose);
         };
 
         socket.on('open', onOpen);
+        socket.on('error', onError);
         socket.on('close', onClose);
+    }
+}
+
+export function connectionError(error) {
+    console.log('connection error', error)
+    return {
+        type: C.ADD_ERROR,
+        error
     }
 }
 
