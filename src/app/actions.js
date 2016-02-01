@@ -34,7 +34,7 @@ export function openConnection() {
             dispatch(connected());
         };
         let onError = function() {
-            dispatch(connectionError(E.NO_CONNECTION));
+            dispatch(connectionError(E.CONNECTION_FAILED));
         };
         let onClose = function(e) {
             dispatch(disconnected());

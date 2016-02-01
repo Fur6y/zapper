@@ -6,25 +6,23 @@ export default class App extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             open: false
-        };
-    }
-
-    connectionStateChanged(props) {
-        if(typeof this.currentReadyState === 'undefined') {
-            // it's app start, don't show snackbar
-            this.currentReadyState = this.props.connection.readyState;
         }
-
-        let previousReadyState = this.currentReadyState;
-        this.currentReadyState = this.props.connection.readyState;
-
-        return previousReadyState !== this.props.connection.readyState;
     }
 
-    shouldComponentUpdate(props) {
-        return !!props.connection.error || this.connectionStateChanged(props);
+    componentWillReceiveProps(nextProps) {
+        let readyStateChanged = this.props.connection.readyState !== nextProps.connection.readyState;
+        let connectionErrorChanged = this.props.connection.error !== nextProps.connection.error;
+
+        if(connectionErrorChanged || readyStateChanged) {
+            this.setState({ open: true })
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.open !== nextState.open;
     }
 
     getSnackbarMessage() {
@@ -40,7 +38,7 @@ export default class App extends React.Component {
 
         if(!!this.props.connection.error) {
             switch(this.props.connection.error) {
-                case E.NO_CONNECTION: message = chrome.i18n.getMessage('errorNoConnection'); break;
+                case E.CONNECTION_FAILED: message = chrome.i18n.getMessage('errorConnectionFailed'); break;
             }
         }
 
@@ -52,7 +50,7 @@ export default class App extends React.Component {
 
         return (
             <Snackbar
-              open={this.connectionStateChanged(this.props) ? true : false}
+              open={this.state.open}
               message={this.getSnackbarMessage()}
               autoHideDuration={stay ? 0 : 3000}
               onRequestClose={() => { this.setState({ open: false }) }}

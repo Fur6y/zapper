@@ -19,8 +19,8 @@
         "message": "Disconnected",
         "description": "The snackbar message on connection disconnected."
     },
-    "errorNoConnection": {
-        "message": "No connection possible",
+    "errorConnectionFailed": {
+        "message": "Connection failed",
         "description": "The snackbar message on connection error."
     },
     "settingsTitle": {

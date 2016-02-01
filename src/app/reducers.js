@@ -6,7 +6,7 @@ export default function (state = initialState, action) {
     let changeReadyState = function(state, newReadyState, resetErrorCode) {
         let newProps;
         if(resetErrorCode) {
-            newProps = { readyState: newReadyState, errorCode: null }
+            newProps = { readyState: newReadyState, error: null }
         } else {
             newProps = { readyState: newReadyState }
         }

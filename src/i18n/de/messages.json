@@ -19,8 +19,8 @@
         "message": "Verbindung getrennt",
         "description": ""
     },
-    "errorNoConnection": {
-        "message": "Verbindung nicht möglich",
+    "errorConnectionFailed": {
+        "message": "Verbindung fehlgeschlagen",
         "description": ""
     },
     "settingsTitle": {
