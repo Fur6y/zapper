@@ -8,6 +8,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 
 import IpSetting from './ipSetting'
 import Discover from './discover'
+import AppVersion from '../appVersion'
 
 let style = {
     height: '100%'
@@ -49,6 +50,7 @@ export default class App extends React.Component {
                             <RaisedButton primary={true} label={chrome.i18n.getMessage('settingsSaveButton')} onClick={ (e) => this.handleSaveButtonClick(e) } style={{ float: 'right' }} />
                         </div>
                     ) }
+                    <AppVersion />
                 </div>
             </div>
         );

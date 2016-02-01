@@ -7,7 +7,8 @@ export default {
         address: 'localhost',
         scheme: 'wss',
         pairingKey: null,
-        pairingKeyCallback: null
+        pairingKeyCallback: null,
+        debug: false
     },
     _socket: null,
     _currentCommandId: 0,
@@ -53,8 +54,7 @@ export default {
         this._config = Object.assign(this._config, config);
 
         // create websocket
-        let debug = __DEV__;
-        let {scheme, address, port} = this._config;
+        let {scheme, address, port, debug} = this._config;
         this._socket = new WS(`${scheme}://${address}:${port}`, debug);
 
         // add listener
