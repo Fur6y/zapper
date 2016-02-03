@@ -23,6 +23,14 @@
         "message": "Verbindung fehlgeschlagen",
         "description": ""
     },
+    "errorNoConnectionConfig": {
+        "message": "Verbindung nicht konfiguriert",
+        "description": ""
+    },
+    "errorAccessDenied": {
+        "message": "Zugriff wurde abgelehnt",
+        "description": ""
+    },
     "settingsTitle": {
         "message": "Einstellungen",
         "description": "The title of the settings page."

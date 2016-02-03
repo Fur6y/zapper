@@ -9,20 +9,17 @@ export default class App extends React.Component {
 
         this.state = {
             open: false
-        }
+        };
     }
 
     componentWillReceiveProps(nextProps) {
         let readyStateChanged = this.props.connection.readyState !== nextProps.connection.readyState;
         let connectionErrorChanged = this.props.connection.error !== nextProps.connection.error;
 
+        // if something changed open snackbar
         if(connectionErrorChanged || readyStateChanged) {
             this.setState({ open: true })
         }
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.state.open !== nextState.open;
     }
 
     getSnackbarMessage() {
@@ -39,6 +36,8 @@ export default class App extends React.Component {
         if(!!this.props.connection.error) {
             switch(this.props.connection.error) {
                 case E.CONNECTION_FAILED: message = chrome.i18n.getMessage('errorConnectionFailed'); break;
+                case E.CONNECTION_DENIED: message = chrome.i18n.getMessage('errorAccessDenied'); break;
+                case E.NO_CONNECTION_CONFIG: message = chrome.i18n.getMessage('errorNoConnectionConfig'); break;
             }
         }
 

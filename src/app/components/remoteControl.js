@@ -137,6 +137,8 @@ export default class RemoteController extends Component {
     channelUp() {
         if(this.props.connection.readyState === WebSocket.OPEN) {
             websocket.channelUp();
+        } else {
+            this.actions.openConnection();
         }
     }
 

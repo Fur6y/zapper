@@ -9,43 +9,48 @@ export function openConnection() {
         let state = getState();
 
         // check smart tv address available
-        if(!state.connection.location) { return; }
+        if(!state.connection.location) {
+            dispatch(connectionError(E.NO_CONNECTION_CONFIG));
+            return;
+        }
 
         let socketOptions = {
             scheme: state.connection.type,
             address: state.connection.location,
             port: state.connection.port,
-            pairingKey: state.connection.pairingKey
+            pairingKey: state.connection.pairingKey,
+            debug: __DEV__
         }
 
         // add pairing key callback
-        // if no pairing key exists
+        // to save pairing key from reponse
         if(!state.connection.pairingKey) {
-            socketOptions.pairingKeyCallback = function(pairingKey) {
+            socketOptions.onPairingKeyReponse = function(pairingKey) {
                 dispatch(savePairingKey(pairingKey));
             }
         }
 
-        let socket = websocket.open(socketOptions);
-
-        dispatch(connecting());
-
-        let onOpen = function() {
+        socketOptions.onInit = function() {
+            dispatch(connecting());
+        }
+        socketOptions.onOpen = function(e) {
             dispatch(connected());
-        };
-        let onError = function() {
-            dispatch(connectionError(E.CONNECTION_FAILED));
-        };
-        let onClose = function(e) {
+        }
+        socketOptions.onClose = function(e) {
             dispatch(disconnected());
-            socket.off('open', onOpen);
-            socket.off('error', onError);
-            socket.off('close', onClose);
-        };
+        }
+        socketOptions.onError = function(error) {
+            if(error.type === 'error') {
+                console.debug('ACTION:', 'tv response error', error);
+                dispatch(connectionError(E.CONNECTION_DENIED));
+            } else {
+                console.debug('ACTION:', 'websocket error', error);
+                dispatch(connectionError(E.CONNECTION_FAILED));
+            }
+        }
 
-        socket.on('open', onOpen);
-        socket.on('error', onError);
-        socket.on('close', onClose);
+        websocket.open(socketOptions);
+
     }
 }
 
@@ -92,7 +97,7 @@ export function closeConnection() {
 }
 
 export function connecting() {
-    console.log('connecting')
+    console.log('ACTION:', 'connecting')
     return {
         type: C.CONNECTING,
         readyState: 0
@@ -100,7 +105,7 @@ export function connecting() {
 }
 
 export function connected() {
-    console.log('connected')
+    console.log('ACTION:', 'connected')
     return {
         type: C.CONNECTED,
         readyState: 1
@@ -108,7 +113,7 @@ export function connected() {
 }
 
 export function disconnecting() {
-    console.log('disconnecting')
+    console.log('ACTION:', 'disconnecting')
     return {
         type: C.DISCONNECTING,
         readyState: 2
@@ -116,7 +121,7 @@ export function disconnecting() {
 }
 
 export function disconnected() {
-    console.log('disconnected')
+    console.log('ACTION:', 'disconnected')
     return {
         type: C.DISCONNECTED,
         readyState: 3

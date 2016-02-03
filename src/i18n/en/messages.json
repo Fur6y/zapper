@@ -23,6 +23,14 @@
         "message": "Connection failed",
         "description": "The snackbar message on connection error."
     },
+    "errorNoConnectionConfig": {
+        "message": "Connection configuration missing",
+        "description": "The snackbar message if the connection configuration missing."
+    },
+    "errorAccessDenied": {
+        "message": "Connection refused",
+        "description": "The snackbar message if the user cancel tv pairing process."
+    },
     "settingsTitle": {
         "message": "Settings",
         "description": "The title of the settings page."

@@ -1,3 +1,5 @@
+'use strict';
+
 import WS from 'browser-websocket'
 import getPairing from './websocket.pairing'
 
@@ -7,7 +9,7 @@ export default {
         address: 'localhost',
         scheme: 'wss',
         pairingKey: null,
-        pairingKeyCallback: null,
+        onPairingKeyReponse: null,
         debug: false
     },
     _socket: null,
@@ -23,12 +25,15 @@ export default {
 
         if(response.type === 'registered') { this._onRegisteredMessage(response); }
         if(response.type === 'response') { this._onResponseMessage(response); }
+        if(response.type === 'error') { this._onErrorMessage(response); }
     },
     _onRegisteredMessage: function(response) {
+        if(this._config.onOpen) { this._config.onOpen(response); }
+
         if(response.payload['client-key'] && this._config.pairingKey !== response.payload['client-key']) {
             this._config.pairingKey = response.payload['client-key'];
-            if(this._config.pairingKeyCallback) {
-                this._config.pairingKeyCallback(this._config.pairingKey);
+            if(this._config.onPairingKeyReponse) {
+                this._config.onPairingKeyReponse(this._config.pairingKey);
             }
         }
     },
@@ -39,11 +44,21 @@ export default {
             delete this._listener[response.id];
         }
     },
+    _onErrorMessage: function(response) {
+        console.warn('tv error message', response);
+        if(this._config.onError) { this._config.onError(response); }
+
+        // close connection if pairing failed
+        if(response.id === getPairing().id) {
+            this.close();
+        }
+    },
     _onError: function(e) {
         console.warn('websocket error', e);
+        if(this._config.onError) { this._config.onError(e); }
     },
     _onClose: function(e) {
-
+        if(this._config.onClose) { this._config.onClose(e); }
     },
     open: function(config) {
         if(this._socket) {
@@ -57,9 +72,12 @@ export default {
         let {scheme, address, port, debug} = this._config;
         this._socket = new WS(`${scheme}://${address}:${port}`, debug);
 
+        if(this._config.onInit) { this._config.onInit(); }
+
         // add listener
         this._socket.on('open', (e) => this._onOpen(e));
         this._socket.on('message', (e) => this._onMessage(e));
+        this._socket.on('error', (e) => this._onError(e));
         this._socket.on('close', (e) => this._onClose(e));
 
         return this._socket;
