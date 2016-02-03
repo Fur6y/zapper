@@ -23,7 +23,7 @@
         "message": "Connection failed",
         "description": "The snackbar message on connection error."
     },
-    "errorNoConnectionConfig": {
+    "errorConnectionConfigMissing": {
         "message": "Connection configuration missing",
         "description": "The snackbar message if the connection configuration missing."
     },

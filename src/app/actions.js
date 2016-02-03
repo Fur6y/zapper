@@ -10,7 +10,7 @@ export function openConnection() {
 
         // check smart tv address available
         if(!state.connection.location) {
-            dispatch(connectionError(E.NO_CONNECTION_CONFIG));
+            dispatch(connectionError(E.CONNECTION_CONFIG_MISSING));
             return;
         }
 

@@ -37,7 +37,7 @@ export default class App extends React.Component {
             switch(this.props.connection.error) {
                 case E.CONNECTION_FAILED: message = chrome.i18n.getMessage('errorConnectionFailed'); break;
                 case E.CONNECTION_DENIED: message = chrome.i18n.getMessage('errorAccessDenied'); break;
-                case E.NO_CONNECTION_CONFIG: message = chrome.i18n.getMessage('errorNoConnectionConfig'); break;
+                case E.CONNECTION_CONFIG_MISSING: message = chrome.i18n.getMessage('errorConnectionConfigMissing'); break;
             }
         }
 

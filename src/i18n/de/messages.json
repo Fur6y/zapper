@@ -23,7 +23,7 @@
         "message": "Verbindung fehlgeschlagen",
         "description": ""
     },
-    "errorNoConnectionConfig": {
+    "errorConnectionConfigMissing": {
         "message": "Verbindung nicht konfiguriert",
         "description": ""
     },
