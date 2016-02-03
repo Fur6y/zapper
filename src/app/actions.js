@@ -40,7 +40,7 @@ export function openConnection() {
             dispatch(disconnected());
         }
         socketOptions.onError = function(error) {
-            if(error.type === 'error') {
+            if(!!error.error) {
                 console.debug('ACTION:', 'tv response error', error);
                 dispatch(connectionError(E.CONNECTION_DENIED));
             } else {
