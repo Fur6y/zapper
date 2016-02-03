@@ -3,8 +3,31 @@ import * as E from './error'
 import ssdp from './lib/ssdp'
 import websocket from './lib/websocket'
 import keychain from './lib/keychain'
+import SSAP_COMMANDS from './ssapCommands'
 
-export function openConnection() {
+export function volumeUp() {
+    return (dispatch, getState) => {
+        let state = getState();
+        if(state.connection.readyState !== WebSocket.OPEN) {
+            dispatch(openConnection(() => { websocket.sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_UP); }));
+        } else {
+            websocket.sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_UP);
+        }
+    }
+}
+
+export function volumeDown() {
+    return (dispatch, getState) => {
+        let state = getState();
+        if(state.connection.readyState !== WebSocket.OPEN) {
+            dispatch(openConnection(() => { websocket.sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_DOWN); }));
+        } else {
+            websocket.sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_DOWN);
+        }
+    }
+}
+
+export function openConnection(openCallback) {
     return (dispatch, getState) => {
         let state = getState();
 
@@ -35,16 +58,15 @@ export function openConnection() {
         }
         socketOptions.onOpen = function(e) {
             dispatch(connected());
+            if(!!openCallback) { openCallback(); }
         }
         socketOptions.onClose = function(e) {
             dispatch(disconnected());
         }
         socketOptions.onError = function(error) {
             if(!!error.error) {
-                console.debug('ACTION:', 'tv response error', error);
                 dispatch(connectionError(E.CONNECTION_DENIED));
             } else {
-                console.debug('ACTION:', 'websocket error', error);
                 dispatch(connectionError(E.CONNECTION_FAILED));
             }
         }
@@ -55,9 +77,8 @@ export function openConnection() {
 }
 
 export function connectionError(error) {
-    console.log('connection error', error)
     return {
-        type: C.ADD_ERROR,
+        type: C.ADD_CONNECTION_ERROR,
         error
     }
 }
@@ -69,7 +90,7 @@ export function readPairingKey() {
             dispatch(updatePairingKey(pairingKey));
         })
         .catch(function() {
-            console.debug('no pairing key');
+            console.log('no pairing key');
         })
     }
 }
@@ -82,7 +103,6 @@ export function savePairingKey(pairingKey) {
 }
 
 export function updatePairingKey(pairingKey) {
-    console.log('update pairing key', pairingKey)
     return {
         type: C.UPDATE_PAIRING_KEY,
         pairingKey
@@ -97,7 +117,6 @@ export function closeConnection() {
 }
 
 export function connecting() {
-    console.log('ACTION:', 'connecting')
     return {
         type: C.CONNECTING,
         readyState: 0
@@ -105,7 +124,6 @@ export function connecting() {
 }
 
 export function connected() {
-    console.log('ACTION:', 'connected')
     return {
         type: C.CONNECTED,
         readyState: 1
@@ -113,7 +131,6 @@ export function connected() {
 }
 
 export function disconnecting() {
-    console.log('ACTION:', 'disconnecting')
     return {
         type: C.DISCONNECTING,
         readyState: 2
@@ -121,7 +138,6 @@ export function disconnecting() {
 }
 
 export function disconnected() {
-    console.log('ACTION:', 'disconnected')
     return {
         type: C.DISCONNECTED,
         readyState: 3
@@ -129,7 +145,6 @@ export function disconnected() {
 }
 
 export function startDiscover() {
-    console.log('discovering')
     return {
         type: C.DISCOVER_TV
     }
@@ -146,7 +161,6 @@ export function discoverTv() {
 }
 
 export function foundTv(device) {
-    console.log('discovering', device)
     return {
         type: C.FOUND_TV,
         device
@@ -172,14 +186,11 @@ export function readLocation() {
         .then(function(location) {
             dispatch(updateLocation(location));
         })
-        .catch(function() {
-            console.debug('no address');
-        });
+        .catch(function() { });
     }
 }
 
 export function updateLocation(location) {
-    console.log('update location', location)
     return {
         type: C.UPDATE_LOCATION,
         location
@@ -187,7 +198,6 @@ export function updateLocation(location) {
 }
 
 export function abortDiscoverTv() {
-    console.log('abort discover tv')
     ssdp.abort();
     return {
         type: C.ABORT_DISCOVER_TV
@@ -195,20 +205,21 @@ export function abortDiscoverTv() {
 }
 
 export function uiShowSettings() {
-    console.log('show settings')
     return {
         type: C.UI_SHOW_SETTINGS
     }
 }
 
 export function uiCloseSettings() {
-    console.log('close settings')
     return {
         type: C.UI_CLOSE_SETTINGS
     }
 }
 
 export default {
+    volumeUp,
+    volumeDown,
+
     openConnection,
     closeConnection,
 

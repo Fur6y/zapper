@@ -26,7 +26,7 @@ export default function (state = initialState, action) {
         case C.DISCONNECTED:
             return changeReadyState(state, action.readyState)
 
-        case C.ADD_ERROR:
+        case C.ADD_CONNECTION_ERROR:
             return Object.assign({}, state, {
                 connection: Object.assign({}, state.connection, {
                     error: action.error

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import websocket from '../lib/websocket'
+import * as E from '../error'
 import Shortcuts from '../shortcuts'
 import Button from './remoteControlButton'
 import CombinedButton from './remoteControlCombinedButton'
@@ -15,12 +16,10 @@ export default class RemoteController extends Component {
         super(props);
 
         this.shortcuts = new Shortcuts({
-            'up': () => { this.handleVolumeUpButtonClick() },
-            'down': () => { this.handleVolumeDownButtonClick() },
-            'right': () => { this.channelUp() },
-            'left': () => { this.channelDown() },
-            '1': () => { this.channelDown() },
-            'num1': () => { this.channelDown() }
+            'up': () => { props.actions.volumeUp() },
+            'down': () => { props.actions.volumeDown() },
+            'right': () => { },
+            'left': () => { }
         });
     }
 
@@ -71,7 +70,7 @@ export default class RemoteController extends Component {
                         <div className="button-column">
                             <Button type="fav" buttonType="square" color="white" text="FAV" onClick={this.onClick} />
                             <Button type="d3" buttonType="square" color="white" text="3D" onClick={this.onClick} />
-                            <Button type="mute" buttonType="square" color="white" text="MUTE" icon="volume_off" onClick={this.onClick} />
+                            <Button type="mute" buttonType="square" color="white" text="MUTE" icon="volume_off" onClick={ () => { this.props.actions.appError(E.APP_COMMAND_NOT_SUPPORTED) } } />
                         </div>
                         <CombinedButton type="channel" buttonType="square" color="lightblue" buttons={[
                                 { onClick: this.onClick, icon: 'expand_less' },
@@ -134,35 +133,7 @@ export default class RemoteController extends Component {
         );
     }
 
-    channelUp() {
-        if(this.props.connection.readyState === WebSocket.OPEN) {
-            websocket.channelUp();
-        } else {
-            this.actions.openConnection();
-        }
-    }
-
-    channelDown() {
-        if(this.props.connection.readyState === WebSocket.OPEN) {
-            websocket.channelDown();
-        }
-    }
-
-    handleVolumeUpButtonClick(e) {
-        if(this.props.connection.readyState === WebSocket.OPEN) {
-            websocket.volumeUp();
-        }
-    }
-
-    handleVolumeDownButtonClick(e) {
-        if(this.props.connection.readyState === WebSocket.OPEN) {
-            websocket.volumeDown();
-        }
-    }
-
     onClick(e) {
         console.log('button clicked:', e.currentTarget.className);
     }
-
-
 }

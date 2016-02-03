@@ -29,6 +29,7 @@ export default {
     },
     _onRegisteredMessage: function(response) {
         if(this._config.onOpen) { this._config.onOpen(response); }
+        this._isOpen = true;
 
         if(response.payload['client-key'] && this._config.pairingKey !== response.payload['client-key']) {
             this._config.pairingKey = response.payload['client-key'];
@@ -58,8 +59,10 @@ export default {
         if(this._config.onError) { this._config.onError(e); }
     },
     _onClose: function(e) {
+        this._isOpen = false;
         if(this._config.onClose) { this._config.onClose(e); }
     },
+    isOpen: () => { return this._isOpen; },
     open: function(config) {
         if(this._socket) {
             this.close();
@@ -85,79 +88,31 @@ export default {
     reconnect: function() {
         this._socket.reconnect();
     },
-    getVolume: function() {
+    sendCommand: function(SSAP_COMMAND, payload) {
+        // create command message
+        let id = '' + this._currentCommandId++;
+        let message = Object.assign({
+            id,
+            type: 'request',
+            uri: SSAP_COMMAND
+        }, payload);
+        // send message
+        this._socket.emit(JSON.stringify(message));
+    },
+    requestStatus: function(SSAP_COMMAND, payload) {
         return new Promise((resolve, reject) => {
+            // create request message
             let id = 'status_' + this._currentCommandId++;
-            let message = {
+            let message = Object.assign({
                 id,
                 type: 'request',
-                uri: 'ssap://audio/getVolume'
-            };
-
-            this._socket.off('message');
+                uri: SSAP_COMMAND
+            }, payload);
+            // send request message
             this._socket.emit(JSON.stringify(message));
-
-            // add to listener
+            // add response event listener
             this._listener[id] = resolve;
         });
-    },
-    setVolume: function(volume) {
-        // volume between 0-100
-        let message = {
-            id: '' + this._currentCommandId++,
-            type: 'request',
-            uri: 'ssap://audio/setVolume',
-            payload: {
-                volume
-            }
-        };
-
-        console.debug('send command:', message);
-        this._socket.emit(JSON.stringify(message));
-    },
-    volumeUp: function() {
-        let message = {
-            id: '' + this._currentCommandId++,
-            type: 'request',
-            uri: 'ssap://audio/volumeUp',
-            payload: {}
-        };
-
-        console.debug('send command:', message);
-        this._socket.emit(JSON.stringify(message));
-    },
-    volumeDown: function() {
-        let message = {
-            id: '' + this._currentCommandId++,
-            type: 'request',
-            uri: 'ssap://audio/volumeDown',
-            payload: {}
-        };
-
-        console.debug('send command:', message);
-        this._socket.emit(JSON.stringify(message));
-    },
-    channelUp: function() {
-        let message = {
-            id: '' + this._currentCommandId++,
-            type: 'request',
-            uri: 'ssap://tv/channelUp',
-            payload: {}
-        };
-
-        console.debug('send command:', message);
-        this._socket.emit(JSON.stringify(message));
-    },
-    channelDown: function() {
-        let message = {
-            id: '' + this._currentCommandId++,
-            type: 'request',
-            uri: 'ssap://tv/channelDown',
-            payload: {}
-        };
-
-        console.debug('send command:', message);
-        this._socket.emit(JSON.stringify(message));
     },
     close: function() {
         if(this._socket) {
