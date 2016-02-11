@@ -1,0 +1,471 @@
+.remote-controller
+    position: relative
+    top: 50px
+    width: 70%
+    margin: 0 auto
+    &:before
+        content: ""
+        display: block
+        padding-top: 480%
+
+    .casing
+        // background-image: url('../assets/img/template.png')
+        // background-size: 104%
+        // background-repeat: no-repeat
+        // background-position: 25% 68%
+        background-color: #1D1C1C
+        border-radius: 0 0 5% 5%
+        position: absolute
+        top: 3%
+        bottom: 0
+        left: 0
+        right: 0
+
+    .casing-top
+        height: 5%
+        border-radius: 50% 50% 0 0
+        background-color: #1D1C1C
+        position: absolute
+        left: 0
+        right: 0
+        top: 0
+
+    .button-row
+        width: 100%
+        padding: 0 9%
+        clear: both
+
+    .button-wrapper
+        float: left
+
+    .button-round,
+    .button-square,
+    .button-combined-square,
+    .button-center-square
+        cursor: pointer
+        text-align: center
+
+    .button-square,
+        border-radius: 15%
+
+    .button-combined-square
+        border-radius: 10%
+
+    .button-round
+        border-radius: 50%
+
+    .button-red
+        background-color: red
+        color: white
+        box-shadow: 1px 1px 0px darkred, 0px 2px 0px darkred, -1px -1px 15px rgba(0, 0, 0, 0.5)
+    .button-red:active
+        box-shadow: 0px 0px 0px darkred, 0px 0px 0px darkred, -1px -1px 10px rgba(0, 0, 0, 0.5)
+        position: relative
+        top: 1px
+        left: 1px
+    .button-white
+        background-color: white
+        color: black
+        box-shadow: 1px 1px 0px grey, 0px 2px 0px grey, -1px -1px 15px rgba(0, 0, 0, 0.5)
+    .button-white:active
+        box-shadow: 0px 0px 0px grey, 0px 0px 0px grey, -1px -1px 10px rgba(0, 0, 0, 0.5)
+        position: relative
+        top: 1px
+        left: 1px
+    .button-lightblue
+        background-color: lightblue
+        color: black
+        box-shadow: 1px 1px 0px #6B858E, 0px 2px 0px #6B858E, -1px -1px 15px rgba(0, 0, 0, 0.5)
+    .button-lightblue:active
+        box-shadow: 0px 0px 0px #6B858E, 0px 0px 0px #6B858E, -1px -1px 10px rgba(0, 0, 0, 0.5)
+        position: relative
+        top: 1px
+        left: 1px
+    .button-blue
+        background-color: #3F51B5
+        color: white
+        box-shadow: 1px 1px 0px darkblue, 0px 2px 0px darkblue, -1px -1px 15px rgba(0, 0, 0, 0.5)
+    .button-blue:active
+        box-shadow: 0px 0px 0px darkblue, 0px 0px 0px darkblue, -1px -1px 10px rgba(0, 0, 0, 0.5)
+        position: relative
+        top: 1px
+        left: 1px
+    .button-black
+        background-color: #1F1F1F
+        color: white
+        box-shadow: 1px 1px 0px #060606, 0px 2px 0px #060606, -1px -1px 15px rgba(0, 0, 0, 0.5)
+    .button-black:active
+        box-shadow: 0px 0px 0px #060606, 0px 0px 0px #060606, -1px -1px 10px rgba(0, 0, 0, 0.5)
+        position: relative
+        top: 1px
+        left: 1px
+    .button-yellow
+        background-color: #989801
+        color: white
+        box-shadow: 1px 1px 0px #5F5F00, 0px 2px 0px #5F5F00, -1px -1px 15px rgba(0, 0, 0, 0.5)
+    .button-yellow:active
+        box-shadow: 0px 0px 0px #5F5F00, 0px 0px 0px #5F5F00, -1px -1px 10px rgba(0, 0, 0, 0.5)
+        position: relative
+        top: 1px
+        left: 1px
+    .button-green
+        background-color: green
+        color: white
+        box-shadow: 1px 1px 0px darkgreen, 0px 2px 0px darkgreen, -1px -1px 15px rgba(0, 0, 0, 0.5)
+    .button-green:active
+        box-shadow: 0px 0px 0px darkgreen, 0px 0px 0px darkgreen, -1px -1px 10px rgba(0, 0, 0, 0.5)
+        position: relative
+        top: 1px
+        left: 1px
+
+    .label
+        color: white
+        text-align: center
+        font-weight: 500
+        font-size: 3.5vw
+        line-height: 5.5vw
+        height: 5.5vw
+        margin-left: -10%
+
+    // button stylings
+    .button-wrapper.power-button
+        width: 22%
+        margin: 0 2%
+        .label
+            display: none
+        .icon
+            font-size: 11vw
+            line-height: 16vw
+
+    .button-wrapper.input-button,
+    .button-wrapper.info-button,
+    .button-wrapper.help-button,
+    .button-wrapper.settings-button
+        padding-top: 2.5%
+        margin: 0 2.8%
+        width: 15%
+        .icon
+            font-size: 6vw
+            line-height: 10.5vw
+        .text
+            font-weight: 500
+            font-size: 2vw
+            line-height: 10.5vw
+
+    .button-wrapper.input-button,
+    .button-wrapper.help-button
+        .text
+            display: none
+
+    .button-wrapper.settings-button
+        .icon
+            display: none
+
+    .button-wrapper.info-button
+        .icon
+            font-size: 3vw
+            position: relative
+            top: 0.6vw
+            line-height: 3vw
+
+    .button-wrapper.num1-button,
+    .button-wrapper.num2-button,
+    .button-wrapper.num3-button,
+    .button-wrapper.num4-button,
+    .button-wrapper.num5-button,
+    .button-wrapper.num6-button,
+    .button-wrapper.num7-button,
+    .button-wrapper.num8-button,
+    .button-wrapper.num9-button,
+    .button-wrapper.num0-button,
+    .button-wrapper.guide-button,
+    .button-wrapper.qview-button
+        padding-top: 2.5%
+        margin: 0 2.5%
+        width: 22.5%
+        .label
+            display: none
+        .icon
+            display: none
+        .text
+            font-weight: 500
+            font-size: 10vw
+            line-height: 12.5vw
+
+    .button-wrapper.guide-button,
+    .button-wrapper.qview-button
+        .text
+            font-size: 4vw
+            line-height: 12.5vw
+
+    .button-wrapper.vol-button,
+    .button-wrapper.channel-button
+        margin: 0 2.5%
+        width: 22.5%
+        .label
+            display: none
+
+    .button-wrapper.vol-button
+        .text
+            font-size: 10vw
+            line-height: 20vw
+            font-weight: 400
+        .icon
+            display: none
+
+    .button-wrapper.channel-button
+        .text
+            display: none
+        .icon
+            font-size: 10vw
+            line-height: 20vw
+
+    .button-column
+        width: 28%
+        float: left
+
+    .button-wrapper.fav-button,
+    .button-wrapper.d3-button,
+    .button-wrapper.mute-button
+        width: 80%
+        margin: 0 10%
+        margin-bottom: 24%
+        float: none
+        .label
+            display: none
+        .text
+            font-weight: 500
+
+    .button-wrapper.fav-button
+        .text
+            font-size: 3.5vw
+            line-height: 10vw
+        .icon
+            display: none
+
+    .button-wrapper.d3-button
+        .text
+            color: red
+            font-size: 5vw
+            line-height: 10vw
+        .icon
+            display: none
+
+    .button-wrapper.mute-button
+        .text
+            font-size: 3.5vw
+            line-height: 10vw
+        .icon
+            font-size: 3.5vw
+            line-height: 4vw
+            position: relative
+            top: 0.6vw
+
+    .button-wrapper.center-button
+        width: 78%
+        margin: 0 2.5% 0 1%
+        .label
+            display: none
+
+        .button-center-square
+            overflow: hidden
+            border-radius: 5%
+
+        .button-combined-arrows
+            position: relative
+            top: -60vw
+            left: 3%
+            width: 93%
+            height: 50vw
+            border-radius: 25%
+            margin-bottom: -100%
+
+        .recent-button,
+        .smart-button,
+        .apps-button,
+        .back-button,
+        .live-button,
+        .exit-button
+            float: left
+            width: 33.3%
+            height: 25vw
+            font-weight: 400
+            text-align: center
+            .text
+                font-size: 4vw
+            .icon
+                font-size: 8vw
+
+        .recent-button,
+        .smart-button,
+        .apps-button
+            margin-bottom: 40%
+
+        .recent-button
+            .text
+                line-height: 14vw
+
+        .smart-button
+            background-color: #3F51B5
+            color: #1F1F1F
+            .text
+                line-height: 18vw
+            .icon
+                position: relative
+                top: -18vw
+                font-size: 7vw
+
+        .apps-button
+            .text
+                line-height: 18vw
+            .icon
+                position: relative
+                top: -18vw
+                color: #989801
+                font-size: 7vw
+
+        .back-button,
+        .live-button,
+        .exit-button
+            .text
+                line-height: 44.5vw
+                white-space: nowrap
+
+        .back-button
+            .icon
+                position: relative
+                top: -123%
+
+    .button-combined-arrows
+        overflow: hidden
+        .left-button,
+        .right-button
+            float: left
+            line-height: 26vw
+        .left-button
+            text-align: left
+        .up-button,
+        .down-button
+            width: 100%
+            height: 25%
+            text-align: center
+        .left-button,
+        .right-button
+            width: 50%
+            height: 50%
+            float: left
+            .icon
+                line-height: 27vw
+        .right-button
+            text-align: right
+        .down-button
+            clear: both
+            .icon
+                line-height: 15vw
+        .ok-button
+            position: relative
+            top: -70%
+            left: 30%
+            width: 40%
+            height: 40%
+            border-radius: 30%
+            .text
+                width: 100%
+                height: 30%
+                line-height: 10vw
+                display: block
+                text-align: center
+                font-weight: 500
+            .icon
+                width: 100%
+                line-height: 15vw
+                font-size: 8vw
+                display: block
+                text-align: center
+
+    .dot-one-button,
+    .dot-two-button,
+    .dot-three-button,
+    .dot-four-button
+        width: 18%
+        margin-right: 3%
+        .button-square
+            height: 6vw
+        .label
+            display: none
+        .icon
+            font-size: 3vw
+            padding-top: 0.7vw
+            line-height: 2.5vw
+            height: 2vw
+            white-space: pre-wrap
+        .text
+            display: none
+    .dot-one-button,
+    .dot-two-button
+        .icon
+            line-height: 5.5vw
+
+    .text-button,
+    .topt-button,
+    .app2-button,
+    .stop-button,
+    .play-button,
+    .pause-button,
+    .rewind-button,
+    .forward-button,
+    .rec-button,
+    .subtitle-button,
+    .ad-button,
+    .radio-button
+        width: 23%
+        margin-right: 7%
+        white-space: nowrap
+        .label
+            display: none
+        .button-square
+            height: 6vw
+        .icon
+            font-size: 6vw
+            line-height: 6vw
+        .text
+            font-size: 4vw
+            line-height: 5.5vw
+
+    .text-button
+        .text
+            text-align: right
+            margin-right: -45%
+        .icon
+            font-size: 4vw
+            position: relative
+            top: 0.3vw
+            left: -37%
+
+    .subtitle-button
+        .text
+            font-size: 3vw
+
+    .button-row
+        &:nth-child(3)
+            margin-top: 34%
+        &:nth-child(4)
+            margin-top: 55%
+        &:nth-child(5)
+            margin-top: 77%
+        &:nth-child(6)
+            margin-top: 99%
+        &:nth-child(7)
+            margin-top: 135%
+        &:nth-child(8)
+            margin-top: 204%
+        &:nth-child(9)
+            margin-top: 317%
+        &:nth-child(10)
+            margin-top: 338%
+        &:nth-child(11)
+            margin-top: 352%
+        &:nth-child(12)
+            margin-top: 367%
+        &:nth-child(13)
+            margin-top: 382%

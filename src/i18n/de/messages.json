@@ -1,0 +1,62 @@
+{
+    "appName": {
+        "message": "Zapper!",
+        "description": ""
+    },
+    "connecting": {
+        "message": "Verbinde …",
+        "description": ""
+    },
+    "connected": {
+        "message": "Verbunden",
+        "description": ""
+    },
+    "disconnecting": {
+        "message": "Trenne Verbindung …",
+        "description": ""
+    },
+    "disconnected": {
+        "message": "Verbindung getrennt",
+        "description": ""
+    },
+    "errorConnectionFailed": {
+        "message": "Verbindung fehlgeschlagen",
+        "description": ""
+    },
+    "errorConnectionConfigMissing": {
+        "message": "Verbindung nicht konfiguriert",
+        "description": ""
+    },
+    "errorAccessDenied": {
+        "message": "Zugriff wurde abgelehnt",
+        "description": ""
+    },
+    "settingsTitle": {
+        "message": "Einstellungen",
+        "description": "The title of the settings page."
+    },
+    "settingsSaveButton": {
+        "message": "Speichern",
+        "description": "The label of the settings save button."
+    },
+    "settingsCancelButton": {
+        "message": "Abbruch",
+        "description": "The label of the settings cancel button."
+    },
+    "discoverButton": {
+        "message": "TV suchen",
+        "description": "The label of the network discover button."
+    },
+    "discoverCancelButton": {
+        "message": "Abbruch",
+        "description": "The label of the button to cancel network discovering."
+    },
+    "discovering": {
+        "message": "Suche TV …",
+        "description": "The text represent the discovering process."
+    },
+    "networkAddressInput": {
+        "message": "IP-Adresse oder Host-Name",
+        "description": "The label of the network address input field."
+    }
+}

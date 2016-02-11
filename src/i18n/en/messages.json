@@ -1,0 +1,62 @@
+{
+    "appName": {
+        "message": "Zapper!",
+        "description": "The name of the app."
+    },
+    "connecting": {
+        "message": "Connecting …",
+        "description": "The snackbar message on connection open."
+    },
+    "connected": {
+        "message": "Connected",
+        "description": "The snackbar message on connection established."
+    },
+    "disconnecting": {
+        "message": "Disconnecting …",
+        "description": "The snackbar message on connection disconnecting."
+    },
+    "disconnected": {
+        "message": "Disconnected",
+        "description": "The snackbar message on connection disconnected."
+    },
+    "errorConnectionFailed": {
+        "message": "Connection failed",
+        "description": "The snackbar message on connection error."
+    },
+    "errorConnectionConfigMissing": {
+        "message": "Connection configuration missing",
+        "description": "The snackbar message if the connection configuration missing."
+    },
+    "errorAccessDenied": {
+        "message": "Connection refused",
+        "description": "The snackbar message if the user cancel tv pairing process."
+    },
+    "settingsTitle": {
+        "message": "Settings",
+        "description": "The title of the settings page."
+    },
+    "settingsSaveButton": {
+        "message": "Save",
+        "description": "The label of the settings save button."
+    },
+    "settingsCancelButton": {
+        "message": "Cancel",
+        "description": "The label of the settings cancel button."
+    },
+    "discoverButton": {
+        "message": "discover tv",
+        "description": "The label of the network discover button."
+    },
+    "discoverCancelButton": {
+        "message": "Cancel",
+        "description": "The label of the button to cancel network discovering."
+    },
+    "discovering": {
+        "message": "Searching tv …",
+        "description": "The text represent the discovering process."
+    },
+    "networkAddressInput": {
+        "message": "IP address or host name",
+        "description": "The label of the network address input field."
+    }
+}

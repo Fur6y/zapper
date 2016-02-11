@@ -1,0 +1,19 @@
+import React, { Component } from 'react';
+import config from '../config';
+
+var style = {
+    position: 'absolute',
+    right: 10,
+    bottom: 10,
+    color: '#c2bcbc'
+};
+
+export default class App extends Component {
+
+    render() {
+        return (
+            <small style={style}>v{config.version}</small>
+        );
+    }
+
+}
