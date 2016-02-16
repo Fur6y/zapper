@@ -9,7 +9,7 @@ const style = {
     zIndex: 1,
 };
 
-const CastButton = class App extends Component {
+const CastButton = class CastButton extends Component {
 
     constructor(props) {
         super(props);

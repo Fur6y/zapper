@@ -9,7 +9,7 @@ const style = {
     fontSize: 27,
 };
 
-const SettingsButton = class App extends React.Component {
+const SettingsButton = class SettingsButton extends React.Component {
 
     constructor(props) {
         super(props);

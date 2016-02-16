@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import Snackbar from 'material-ui/lib/snackbar';
 import * as E from '../error';
 
-const AppSnackbar = class App extends React.Component {
+const AppSnackbar = class AppSnackbar extends React.Component {
 
     constructor(props) {
         super(props);

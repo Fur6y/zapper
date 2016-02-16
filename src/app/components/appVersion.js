@@ -8,7 +8,7 @@ const style = {
     color: '#c2bcbc',
 };
 
-export default class App extends Component {
+export default class AppVersion extends Component {
 
     render() {
         return (
