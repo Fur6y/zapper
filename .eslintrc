@@ -2,7 +2,10 @@
     "parser": "babel-eslint",
     "env": {
         "browser": true,
-        "node": true
+        "node": false
     },
-    "extends": "airbnb"
+    "extends": "airbnb",
+    "rules": {
+        "indent": [2, 4]
+    }
 }

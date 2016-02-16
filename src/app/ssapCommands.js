@@ -19,5 +19,5 @@ export default {
     SYSTEM_TOAST: 'palm://system.notifications/createToast',
     ENTER_KEY: 'ssap://com.webos.service.ime/sendEnterKey',
     DELETE_CHARS: 'ssap://com.webos.service.ime/deleteCharacters', // payload { count: 10 }
-    INSERT_TEXT: 'ssap://com.webos.service.ime/insertText' // payload { text: 'string', replace: 0 }
-}
+    INSERT_TEXT: 'ssap://com.webos.service.ime/insertText', // payload { text: 'string', replace: 0 }
+};

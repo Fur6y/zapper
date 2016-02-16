@@ -1,4 +1,5 @@
+/* global VERSION, __DEV__ */
 export default {
     version: VERSION,
-    dev: __DEV__
-}
+    dev: __DEV__,
+};

@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class RemoteControlButton extends Component {
+const RemoteControlButton = class RemoteControlButton extends Component {
     render() {
-        let buttonWrapperClassName = `button-wrapper ${this.props.type}-button`;
-        let buttonClassName = `button-${this.props.buttonType} button-${this.props.color}`;
+        const buttonWrapperClassName = `button-wrapper ${this.props.type}-button`;
+        const buttonClassName = `button-${this.props.buttonType} button-${this.props.color}`;
         return (
             <div className={buttonWrapperClassName}>
                 <div className="label">{this.props.labelText}</div>
@@ -14,4 +14,16 @@ export default class RemoteControlButton extends Component {
             </div>
         );
     }
-}
+};
+
+RemoteControlButton.propTypes = {
+    type: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+    buttonType: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    labelText: PropTypes.string,
+    text: PropTypes.string,
+    icon: PropTypes.string,
+};
+
+export default RemoteControlButton;

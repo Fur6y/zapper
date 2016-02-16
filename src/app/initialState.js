@@ -6,11 +6,11 @@ export default {
         pairingKey: null,
         deviceName: '',
         readyState: 3, // connecting=0, open=1, closing=2, closed=3
-        error: null
+        error: null,
     },
     isDiscoveringTv: false,
     discoveredDevices: [],
     ui: {
-        settings: false
-    }
-}
+        settings: false,
+    },
+};
