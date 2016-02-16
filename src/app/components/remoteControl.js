@@ -18,8 +18,15 @@ export default class RemoteController extends Component {
         this.shortcuts = new Shortcuts({
             'up': () => { props.actions.volumeUp() },
             'down': () => { props.actions.volumeDown() },
-            'right': () => { },
-            'left': () => { }
+            'right': () => { props.actions.channelUp() },
+            'left': () => { props.actions.channelDown() },
+            'p': () => { props.actions.mediaPlay() },
+            'o': () => { props.actions.mediaPause() },
+            'i': () => { props.actions.mediaStop() },
+            'f': () => { props.actions.mediaForward() },
+            'r': () => { props.actions.mediaRewind() },
+            'm': () => { props.actions.toggleMute() },
+            'd': () => { props.actions.toggle3d() }
         });
     }
 
@@ -33,7 +40,7 @@ export default class RemoteController extends Component {
                 <div className="casing-top"></div>
                 <div className="casing">
                     <div className="button-row">
-                        <Button type="power" buttonType="round" color="red" icon="power_settings_new" onClick={this.onClick} />
+                        <Button type="power" buttonType="round" color="red" icon="power_settings_new" onClick={ () => { this.props.actions.turnOffTv() } } />
                     </div>
                     <div className="button-row">
                         <Button type="input" buttonType="round" color="white" icon="input" labelText="INPUT" onClick={this.onClick} />
@@ -63,18 +70,18 @@ export default class RemoteController extends Component {
                     </div>
                     <div className="button-row">
                         <CombinedButton type="vol" buttonType="square" color="lightblue" buttons={[
-                                { onClick: this.onClick, text: '+' },
-                                { onClick: this.onClick, text: '–' }
+                                { onClick: () => { this.props.actions.volumeUp() }, text: '+' },
+                                { onClick: () => { this.props.actions.volumeDown() }, text: '–' }
                             ]}>
                         </CombinedButton>
                         <div className="button-column">
                             <Button type="fav" buttonType="square" color="white" text="FAV" onClick={this.onClick} />
-                            <Button type="d3" buttonType="square" color="white" text="3D" onClick={this.onClick} />
-                            <Button type="mute" buttonType="square" color="white" text="MUTE" icon="volume_off" onClick={ () => { this.props.actions.appError(E.APP_COMMAND_NOT_SUPPORTED) } } />
+                            <Button type="d3" buttonType="square" color="white" text="3D" onClick={() => { this.props.actions.toggle3d() }} />
+                            <Button type="mute" buttonType="square" color="white" text="MUTE" icon="volume_off" onClick={() => { this.props.actions.toggleMute() }} />
                         </div>
                         <CombinedButton type="channel" buttonType="square" color="lightblue" buttons={[
-                                { onClick: this.onClick, icon: 'expand_less' },
-                                { onClick: this.onClick, icon: 'expand_more' }
+                                { onClick: () => { this.props.actions.channelUp() }, icon: 'expand_less' },
+                                { onClick: () => { this.props.actions.channelDown() }, icon: 'expand_more' }
                             ]}>
                         </CombinedButton>
                     </div>
@@ -114,17 +121,17 @@ export default class RemoteController extends Component {
                         <Button type="app2" buttonType="square" color="black" text="APP/*" onClick={this.onClick} />
                     </div>
                     <div className="button-row">
-                        <Button type="stop" buttonType="square" color="black" icon="view_module" onClick={this.onClick} />
-                        <Button type="play" buttonType="square" color="black" icon="play_arrow" onClick={this.onClick} />
-                        <Button type="pause" buttonType="square" color="black" icon="pause" onClick={this.onClick} />
+                        <Button type="stop" buttonType="square" color="black" icon="stop" onClick={() => { this.props.actions.mediaStop() }} />
+                        <Button type="play" buttonType="square" color="black" icon="play_arrow" onClick={() => { this.props.actions.mediaPlay() }} />
+                        <Button type="pause" buttonType="square" color="black" icon="pause" onClick={() => { this.props.actions.mediaPause() }} />
                     </div>
                     <div className="button-row">
-                        <Button type="rewind" buttonType="square" color="black" icon="fast_rewind" onClick={this.onClick} />
-                        <Button type="forward" buttonType="square" color="black" icon="fast_forward" onClick={this.onClick} />
+                        <Button type="rewind" buttonType="square" color="black" icon="fast_rewind" onClick={() => { this.props.actions.mediaRewind() }} />
+                        <Button type="forward" buttonType="square" color="black" icon="fast_forward" onClick={() => { this.props.actions.mediaForward() }} />
                         <Button type="rec" buttonType="square" color="black" text="REC/*" onClick={this.onClick} />
                     </div>
                     <div className="button-row">
-                        <Button type="subtitle" buttonType="square" color="black" text="SUBTITLE" onClick={this.onClick} />
+                        <Button type="subtitle" buttonType="square" color="black" text="SUBTITLE" onClick={() => { this.props.actions.toast('Placeholder') }} />
                         <Button type="ad" buttonType="square" color="black" text="AD" onClick={this.onClick} />
                         <Button type="radio" buttonType="square" color="black" text="TV/RAD" onClick={this.onClick} />
                     </div>

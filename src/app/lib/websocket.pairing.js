@@ -4,7 +4,7 @@ let hello =
     'id': 'register_0',
     'payload': {
         'forcePairing': false,
-        'pairingType': 'PROMPT', // PROMPT or PIN
+        'pairingType': 'PROMPT', // PROMPT, PIN or COMBINED
         'client-key': '',
         'manifest': {
             'manifestVersion': 1,

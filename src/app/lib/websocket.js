@@ -9,7 +9,7 @@ export default {
         address: 'localhost',
         scheme: 'wss',
         pairingKey: null,
-        onPairingKeyReponse: null,
+        onPairingKeyResponse: null,
         debug: false
     },
     _socket: null,
@@ -33,8 +33,8 @@ export default {
 
         if(response.payload['client-key'] && this._config.pairingKey !== response.payload['client-key']) {
             this._config.pairingKey = response.payload['client-key'];
-            if(this._config.onPairingKeyReponse) {
-                this._config.onPairingKeyReponse(this._config.pairingKey);
+            if(this._config.onPairingKeyResponse) {
+                this._config.onPairingKeyResponse(this._config.pairingKey);
             }
         }
     },
@@ -95,7 +95,7 @@ export default {
             id,
             type: 'request',
             uri: SSAP_COMMAND
-        }, payload);
+        }, {payload});
         // send message
         this._socket.emit(JSON.stringify(message));
     },
@@ -107,7 +107,7 @@ export default {
                 id,
                 type: 'request',
                 uri: SSAP_COMMAND
-            }, payload);
+            }, {payload});
             // send request message
             this._socket.emit(JSON.stringify(message));
             // add response event listener

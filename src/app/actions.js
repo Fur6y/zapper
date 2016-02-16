@@ -4,27 +4,92 @@ import ssdp from './lib/ssdp'
 import websocket from './lib/websocket'
 import keychain from './lib/keychain'
 import SSAP_COMMANDS from './ssapCommands'
+import util from './util'
+import icon from '../assets/img/app/128x128.png'
 
-export function volumeUp() {
+export function sendCommand(SSAP_COMMAND, payload) {
     return (dispatch, getState) => {
         let state = getState();
         if(state.connection.readyState !== WebSocket.OPEN) {
-            dispatch(openConnection(() => { websocket.sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_UP); }));
+            dispatch(openConnection(() => { websocket.sendCommand(SSAP_COMMAND, payload); }));
         } else {
-            websocket.sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_UP);
+            websocket.sendCommand(SSAP_COMMAND, payload);
         }
     }
 }
 
-export function volumeDown() {
+export function requestStatus(SSAP_COMMAND, payload, callback) {
     return (dispatch, getState) => {
         let state = getState();
+        let request = () => {
+            websocket.requestStatus(SSAP_COMMAND, payload)
+            .then((response) => { callback(response); })
+            .catch(() => { callback(); });
+        };
+
         if(state.connection.readyState !== WebSocket.OPEN) {
-            dispatch(openConnection(() => { websocket.sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_DOWN); }));
+            dispatch(openConnection(request));
         } else {
-            websocket.sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_DOWN);
+            request();
         }
     }
+}
+
+export function volumeUp() {
+    return sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_UP);
+}
+export function volumeDown() {
+    return sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_DOWN);
+}
+export function channelUp() {
+    return sendCommand(SSAP_COMMANDS.TV_CHANNEL_UP);
+}
+export function channelDown() {
+    return sendCommand(SSAP_COMMANDS.TV_CHANNEL_DOWN);
+}
+export function mediaPause() {
+    return sendCommand(SSAP_COMMANDS.MEDIA_CONTROLS_PAUSE);
+}
+export function mediaStop() {
+    return sendCommand(SSAP_COMMANDS.MEDIA_CONTROLS_STOP);
+}
+export function mediaPlay() {
+    return sendCommand(SSAP_COMMANDS.MEDIA_CONTROLS_PLAY);
+}
+export function mediaForward() {
+    return sendCommand(SSAP_COMMANDS.MEDIA_CONTROLS_FORWARD);
+}
+export function mediaRewind() {
+    return sendCommand(SSAP_COMMANDS.MEDIA_CONTROLS_REWIND);
+}
+export function turnOffTv() {
+    return sendCommand(SSAP_COMMANDS.SYSTEM_TURN_OFF);
+}
+export function toggleMute() {
+    return (dispatch, getState) => {
+        dispatch(requestStatus(SSAP_COMMANDS.AUDIO_GET_MUTE, null, (response) => {
+            dispatch(sendCommand(SSAP_COMMANDS.AUDIO_SET_MUTE, { mute: !response.mute }));
+        }));
+    }
+}
+export function toggle3d() {
+    return (dispatch, getState) => {
+        dispatch(requestStatus(SSAP_COMMANDS.TV_GET_3D, null, (response) => {
+            console.log('3d status', response);
+            if(response.status3D && response.status3D.status) {
+                dispatch(sendCommand(SSAP_COMMANDS.TV_3D_OFF));
+            } else {
+                dispatch(sendCommand(SSAP_COMMANDS.TV_3D_ON));
+            }
+        }));
+    }
+}
+export function toast(message) {
+    return sendCommand(SSAP_COMMANDS.SYSTEM_TOAST, {
+        message,
+        iconData: util.getImg(icon),
+        iconExtension: util.getExt(icon)
+    });
 }
 
 export function openConnection(openCallback) {
@@ -45,14 +110,12 @@ export function openConnection(openCallback) {
             debug: __DEV__
         }
 
-        // add pairing key callback
-        // to save pairing key from reponse
-        if(!state.connection.pairingKey) {
-            socketOptions.onPairingKeyReponse = function(pairingKey) {
+        // save pairing key from reponse
+        socketOptions.onPairingKeyResponse = function(pairingKey) {
+            if(state.connection.pairingKey !== pairingKey) {
                 dispatch(savePairingKey(pairingKey));
             }
         }
-
         socketOptions.onInit = function() {
             dispatch(connecting());
         }
@@ -219,6 +282,17 @@ export function uiCloseSettings() {
 export default {
     volumeUp,
     volumeDown,
+    channelUp,
+    channelDown,
+    mediaPause,
+    mediaStop,
+    mediaPlay,
+    mediaForward,
+    mediaRewind,
+    toast,
+    turnOffTv,
+    toggleMute,
+    toggle3d,
 
     openConnection,
     closeConnection,
