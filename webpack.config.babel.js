@@ -39,11 +39,11 @@ module.exports = {
       },
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader'
+        loader: 'file?hash=base64&name=[name].[hash:6].[ext]'
       },
       {
-       test: /\.(jpe?g|png|gif)$/i,
-       loader: 'file?hash=sha512&digest=hex&name=[hash].[ext]'
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: 'url?limit=25000'
       }
     ]
   }
