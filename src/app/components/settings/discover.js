@@ -39,12 +39,13 @@ const Discover = class Discover extends React.Component {
             content = (
                 <div>
                     <RaisedButton
+                      fullWidth
                       style={{ margin: '0 20px 10px 0' }}
                       label={chrome.i18n.getMessage('discoverCancelButton')}
                       onClick={this.abortDiscoverTv}
                     />
-                    <span>{chrome.i18n.getMessage('discovering')}</span>
-                    <LinearProgress mode="indeterminate"/>
+                    <div>{chrome.i18n.getMessage('discovering')}</div>
+                    <LinearProgress mode="indeterminate" />
                     <DeviceList
                       discoveredDevices={this.props.discoveredDevices}
                       actions={this.props.actions}

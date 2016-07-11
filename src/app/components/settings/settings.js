@@ -14,9 +14,6 @@ const cardStyle = {
     margin: '10px 0',
 };
 
-const buttonRowStyle = {
-    marginTop: 20,
-};
 
 const Settings = class Settings extends React.Component {
 
@@ -48,16 +45,19 @@ const Settings = class Settings extends React.Component {
                       location = {this.props.connection.location}
                       style = {cardStyle}
                     />
-                    <div style = {buttonRowStyle}>
+                    <div style={{ marginTop: 20 }}>
                         <RaisedButton
+                          fullWidth
                           label={chrome.i18n.getMessage('settingsCancelButton')}
                           onClick={this.handleCancelButtonClick}
                         />
+                    </div>
+                    <div style={{ marginTop: 10 }}>
                         <RaisedButton
                           primary
+                          fullWidth
                           label={chrome.i18n.getMessage('settingsSaveButton')}
                           onClick={this.handleSaveButtonClick}
-                          style={{ float: 'right' }}
                         />
                     </div>
                 </div>
@@ -66,7 +66,7 @@ const Settings = class Settings extends React.Component {
 
         return (
             <div style={style}>
-                <div style={{ minWidth: 190, maxWidth: 276, margin: '0 auto' }}>
+                <div style={{ minWidth: 180, maxWidth: 276, margin: '0 auto', padding: 10 }}>
                     <h1 style={{ margin: '20px 0' }}>
                         {chrome.i18n.getMessage('settingsTitle')}
                     </h1>
