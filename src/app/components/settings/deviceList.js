@@ -17,12 +17,13 @@ const DeviceList = class DeviceList extends React.Component {
     }
 
     render() {
+        const self = this;
         return (
             <div style={containerStyle}>
                 {
                     this.props.discoveredDevices.map((device, i) =>
                         <FlatButton
-                          onClick={function handleClick(e) { this.handleDeviceClick(e, device); }}
+                          onClick={function handleClick(e) { self.handleDeviceClick(e, device); }}
                           key={i}
                           label={device.name}
                           secondary

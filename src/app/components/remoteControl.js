@@ -86,7 +86,7 @@ const RemoteController = class RemoteController extends Component {
                           buttonType="square"
                           color="white"
                           text="1"
-                          onClick={this.onClick}
+                          onClick={this.props.actions.test}
                         />
                         <Button
                           type="num2"
@@ -417,8 +417,8 @@ const RemoteController = class RemoteController extends Component {
         );
     }
 
-    onClick(e) {
-        console.log('button clicked:', e.currentTarget.className);
+    onClick() {
+        // console.log('button clicked:', e.currentTarget.className);
     }
 };
 

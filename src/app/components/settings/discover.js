@@ -1,4 +1,3 @@
-/* global chrome */
 import React, { PropTypes } from 'react';
 import Card from 'material-ui/lib/card/card';
 import LinearProgress from 'material-ui/lib/linear-progress';

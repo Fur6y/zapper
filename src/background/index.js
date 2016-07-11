@@ -1,5 +1,4 @@
 /* eslint prefer-arrow-callback: 0 */
-/* global chrome */
 chrome.app.runtime.onLaunched.addListener(function listener() {
     chrome.app.window.create('index.html', {
         id: 'de.fabianfetting.zapper',

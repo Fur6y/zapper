@@ -6,6 +6,7 @@ export default {
     AUDIO_GET_MUTE: 'ssap://audio/getMute', // response: { mute: false, returnValue: true }
     TV_CHANNEL_UP: 'ssap://tv/channelUp',
     TV_CHANNEL_DOWN: 'ssap://tv/channelDown',
+    TV_OPEN_CHANNEL: 'ssap://tv/openChannel', // payload: { channelNumber: 1 } // { channelId: id }
     MEDIA_CONTROLS_PLAY: 'ssap://media.controls/play',
     MEDIA_CONTROLS_STOP: 'ssap://media.controls/stop',
     MEDIA_CONTROLS_PAUSE: 'ssap://media.controls/pause',

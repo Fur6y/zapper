@@ -1,4 +1,3 @@
-/* global chrome */
 import React, { PropTypes } from 'react';
 import Snackbar from 'material-ui/lib/snackbar';
 import * as E from '../error';
@@ -39,6 +38,7 @@ const AppSnackbar = class AppSnackbar extends React.Component {
         }
 
         if (!!this.props.connection.error) {
+            /* eslint-disable */
             switch (this.props.connection.error) {
             case E.CONNECTION_FAILED:
                 message = chrome.i18n.getMessage('errorConnectionFailed');
@@ -50,6 +50,7 @@ const AppSnackbar = class AppSnackbar extends React.Component {
                 message = chrome.i18n.getMessage('errorConnectionConfigMissing');
                 break;
             }
+            /*eslint-enable */
         }
 
         return message;

@@ -1,10 +1,16 @@
-var gulp = require('gulp');
-var del = require('del');
+const gulp = require('gulp');
+const del = require('del');
 
-var targetFolder = './bin/';
+const targetFolder = './bin/';
 
-gulp.task('clean:bin', function () {
-  return del([
-    targetFolder
-  ]);
-});
+gulp.task('clean:bin', () =>
+    del([
+        targetFolder,
+    ])
+);
+
+gulp.task('clean:dist', () =>
+    del([
+        './dist/',
+    ])
+);

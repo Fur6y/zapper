@@ -1,4 +1,3 @@
-/* global chrome */
 import CryptoJsAes from 'crypto-js/aes';
 import CryptoJsEncUtf8 from 'crypto-js/enc-utf8';
 

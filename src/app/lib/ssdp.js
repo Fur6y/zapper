@@ -10,6 +10,7 @@ export default {
     _listener: null,
     _createRequestHeader: function _createRequestHeader(address, port) {
         const host = `${address}:${port}`;
+        /* eslint-disable */
         const header =
         'M-SEARCH * HTTP/1.1\r\n' +
         'HOST: ' + host + '\r\n' +
@@ -18,6 +19,7 @@ export default {
         'ST: urn:dial-multiscreen-org:service:dial:1\r\n' +
         'USER-AGENT: UDAP/2.0\r\n' +
         '\r\n';
+        /* eslint-enable */
 
         return header;
     },

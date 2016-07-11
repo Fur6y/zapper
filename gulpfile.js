@@ -1,5 +1,6 @@
-var gulp = require('gulp');
-var requireDir = require('require-dir');
+const gulp = require('gulp');
+const requireDir = require('require-dir');
+
 requireDir('./gulp-tasks');
 
 gulp.task('default', [
@@ -9,5 +10,18 @@ gulp.task('default', [
     'copy:html',
     'copy:img',
     'copy:i18n',
-    'copy:background'
+    'copy:background',
+]);
+
+gulp.task('prod', [
+    'lint',
+    'clean:bin',
+    'clean:dist',
+    'run:webpackProd',
+    'copy:manifest',
+    'copy:html',
+    'copy:img',
+    'copy:i18n',
+    'copy:background',
+    'zip',
 ]);

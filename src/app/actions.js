@@ -1,4 +1,3 @@
-/* global __DEV__ */
 import * as C from './constants';
 import * as E from './error';
 import ssdp from './lib/ssdp';
@@ -182,6 +181,14 @@ export function requestStatus(SSAP_COMMAND, payload, callback) {
     };
 }
 
+export function test() {
+    return requestStatus(SSAP_COMMANDS.TV_OPEN_CHANNEL, { channelNumber: '1' }, (response) => {
+    // return requestStatus('ssap://api/getServiceList', null, (response) => {
+    // return requestStatus('ssap://api/getService', { name: 'media.controls' }, (response) => {
+    // return requestStatus('ssap://system/getSystemInfo', null, (response) => {
+        console.debug(response);
+    });
+}
 export function volumeUp() {
     return sendCommand(SSAP_COMMANDS.AUDIO_VOLUME_UP);
 }
@@ -295,6 +302,7 @@ export default {
     turnOffTv,
     toggleMute,
     toggle3d,
+    test,
 
     openConnection,
     closeConnection,
