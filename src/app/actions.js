@@ -294,7 +294,6 @@ export default {
     turnOffTv,
     toggleMute,
     toggle3d,
-    test,
 
     openConnection,
     closeConnection,
