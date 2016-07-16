@@ -1,5 +1,5 @@
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ggkoaeeeojgdhkpalgklpddfdolnmjpi.svg?maxAge=2592000)](https://chrome.google.com/webstore/category/apps)
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/akkpkmohidabkpocjpienklomifcpeid.svg?maxAge=2592000)](https://chrome.google.com/webstore/category/apps)
+[![Project Status: Inactive - The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](http://www.repostatus.org/badges/latest/inactive.svg)](http://www.repostatus.org/#inactive)
 
 # Zapper!
 
