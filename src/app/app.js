@@ -1,15 +1,15 @@
-import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import React, { PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import actions from './actions'
-import CastButton from './components/castButton'
-import SettingButton from './components/settingButton'
-import AppSnackbar from './components/appSnackbar'
-import Settings from './components/settings/settings'
-import RemoteControl from './components/remoteControl'
+import actions from './actions';
+import CastButton from './components/castButton';
+import SettingButton from './components/settingButton';
+import AppSnackbar from './components/appSnackbar';
+import Settings from './components/settings/settings';
+import RemoteControl from './components/remoteControl';
 
-let ControllerApp = class App extends React.Component {
+const ControllerApp = class ControllerApp extends React.Component {
 
     constructor(props) {
         super(props);
@@ -19,17 +19,36 @@ let ControllerApp = class App extends React.Component {
     }
 
     render() {
-        let showSettings = this.props.ui.settings;
+        const showSettings = this.props.ui.settings;
+
+        let castButton;
+        if (!showSettings) {
+            castButton = (<CastButton
+              actions={this.props.actions}
+              connection={this.props.connection}
+            />);
+        }
+
+        let content;
+        if (showSettings) {
+            content = (<Settings
+              actions={this.props.actions}
+              isDiscoveringTv={this.props.isDiscoveringTv}
+              discoveredDevices={this.props.discoveredDevices}
+              connection={this.props.connection}
+            />);
+        } else {
+            content = (<RemoteControl
+              actions={this.props.actions}
+              connection={this.props.connection}
+            />);
+        }
 
         return (
             <div className="app">
-                { showSettings ? '' : <CastButton actions={this.props.actions} connection={this.props.connection} /> }
+                { castButton }
                 <div className="content">
-                    {
-                        showSettings ?
-                        <Settings actions={this.props.actions} isDiscoveringTv={this.props.isDiscoveringTv} discoveredDevices={this.props.discoveredDevices} connection={this.props.connection} /> :
-                        <RemoteControl actions={this.props.actions} connection={this.props.connection} />
-                    }
+                    { content }
                 </div>
                 { showSettings ? '' : <SettingButton actions={this.props.actions} /> }
                 <AppSnackbar connection={this.props.connection} />
@@ -37,15 +56,24 @@ let ControllerApp = class App extends React.Component {
         );
     }
 
-}
+};
+
+ControllerApp.propTypes = {
+    actions: PropTypes.object.isRequired,
+    isDiscoveringTv: PropTypes.bool.isRequired,
+    discoveredDevices: PropTypes.array.isRequired,
+    ui: PropTypes.object.isRequired,
+    connection: PropTypes.object.isRequired,
+};
 
 
-let mapStateToProps = function(state) {
+function mapStateToProps(state) {
     return state;
 }
-let mapDispatchToProps = function(dispatch) {
+
+function mapDispatchToProps(dispatch) {
     return { actions: bindActionCreators(actions, dispatch) };
 }
 
 // Wrap the component to inject dispatch and state into it
-export default connect(mapStateToProps, mapDispatchToProps)(ControllerApp)
+export default connect(mapStateToProps, mapDispatchToProps)(ControllerApp);

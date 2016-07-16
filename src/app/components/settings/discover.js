@@ -2,13 +2,18 @@ import React, { PropTypes } from 'react';
 import Card from 'material-ui/lib/card/card';
 import LinearProgress from 'material-ui/lib/linear-progress';
 import RaisedButton from 'material-ui/lib/raised-button';
-import FlatButton from 'material-ui/lib/flat-button';
 
 import DeviceList from './deviceList';
 
-export default class App extends React.Component {
+const Discover = class Discover extends React.Component {
 
-    handleDiscoverButtonClick(e) {
+    constructor(props) {
+        super(props);
+        this.handleDiscoverButtonClick = this.handleDiscoverButtonClick.bind(this);
+        this.abortDiscoverTv = this.abortDiscoverTv.bind(this);
+    }
+
+    handleDiscoverButtonClick() {
         this.props.actions.discoverTv();
     }
 
@@ -18,21 +23,33 @@ export default class App extends React.Component {
 
     render() {
         let content;
-        if(!this.props.isDiscoveringTv) {
+        if (!this.props.isDiscoveringTv) {
             content = (
                 <div>
                     <div style={{ textAlign: 'center' }}>
-                        <RaisedButton onClick={(e) => { this.handleDiscoverButtonClick(e) }} label={chrome.i18n.getMessage('discoverButton')} secondary={true} />
+                        <RaisedButton
+                          onClick={this.handleDiscoverButtonClick}
+                          label={chrome.i18n.getMessage('discoverButton')}
+                          secondary
+                        />
                     </div>
                 </div>
             );
         } else {
             content = (
                 <div>
-                    <RaisedButton style={{ margin: '0 20px 10px 0' }} label={chrome.i18n.getMessage('discoverCancelButton')} onClick={(e) => { this.abortDiscoverTv(e) }} />
-                    <span>{chrome.i18n.getMessage('discovering')}</span>
-                    <LinearProgress mode="indeterminate"/>
-                    <DeviceList discoveredDevices={this.props.discoveredDevices} actions={this.props.actions} />
+                    <RaisedButton
+                      fullWidth
+                      style={{ margin: '0 20px 10px 0' }}
+                      label={chrome.i18n.getMessage('discoverCancelButton')}
+                      onClick={this.abortDiscoverTv}
+                    />
+                    <div>{chrome.i18n.getMessage('discovering')}</div>
+                    <LinearProgress mode="indeterminate" />
+                    <DeviceList
+                      discoveredDevices={this.props.discoveredDevices}
+                      actions={this.props.actions}
+                    />
                 </div>
             );
         }
@@ -43,4 +60,13 @@ export default class App extends React.Component {
             </Card>
         );
     }
-}
+};
+
+Discover.propTypes = {
+    actions: PropTypes.object.isRequired,
+    style: PropTypes.object.isRequired,
+    isDiscoveringTv: PropTypes.bool.isRequired,
+    discoveredDevices: PropTypes.array.isRequired,
+};
+
+export default Discover;

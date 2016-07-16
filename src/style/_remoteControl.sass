@@ -9,10 +9,6 @@
         padding-top: 480%
 
     .casing
-        // background-image: url('../assets/img/template.png')
-        // background-size: 104%
-        // background-repeat: no-repeat
-        // background-position: 25% 68%
         background-color: #1D1C1C
         border-radius: 0 0 5% 5%
         position: absolute
@@ -37,6 +33,12 @@
 
     .button-wrapper
         float: left
+    .button-wrapper.disabled
+        .label,
+        .button-round,
+        .button-square,
+        .button-center-square
+            opacity: 0.1
 
     .button-round,
     .button-square,

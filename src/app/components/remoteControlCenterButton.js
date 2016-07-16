@@ -1,17 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class RemoteControlCenterButton extends Component {
+const RemoteControlCenterButton = class RemoteControlCenterButton extends Component {
     render() {
-        let buttonWrapperClassName = `button-wrapper ${this.props.type}-button`;
-        let buttonClassName = `button-center-${this.props.buttonType} button-${this.props.color}`;
+        const disabled = this.props.disabled ? ' disabled' : '';
+        const buttonWrapperClassName = `button-wrapper ${this.props.type}-button${disabled}`;
+        const buttonClassName = `button-center-${this.props.buttonType} button-${this.props.color}`;
 
-        let buttonMarkup = (button, i) => {
-            return (<div className={button.className} onClick={button.onClick} key={i}>
+        const buttonMarkup = (button, i) =>
+            (<div className={button.className} onClick={button.onClick} key={i}>
                 <span className="text">{button.text}</span>
                 <span className="material-icons icon">{button.icon}</span>
                 </div>
             );
-        }
+
         return (
             <div className={buttonWrapperClassName}>
                 <div className="label">{this.props.labelText}</div>
@@ -26,4 +27,18 @@ export default class RemoteControlCenterButton extends Component {
             </div>
         );
     }
-}
+};
+
+RemoteControlCenterButton.propTypes = {
+    type: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    color: PropTypes.string.isRequired,
+    buttonType: PropTypes.string.isRequired,
+    labelText: PropTypes.string,
+    topButtons: PropTypes.array.isRequired,
+    bottomButtons: PropTypes.array.isRequired,
+    arrowButtons: PropTypes.array.isRequired,
+    arrowCenterButton: PropTypes.object.isRequired,
+};
+
+export default RemoteControlCenterButton;

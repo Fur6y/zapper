@@ -1,6 +1,14 @@
 {
-    "appName": {
+    "shortAppName": {
         "message": "Zapper!",
+        "description": ""
+    },
+    "appName": {
+        "message": "Zapper! – Fernbedienung für LG Smart-TVs",
+        "description": ""
+    },
+    "appDescription": {
+        "message": "Mit Zapper! kannst du ganz einfach deinen LG Smart-TV steuern.",
         "description": ""
     },
     "connecting": {

@@ -1,7 +1,15 @@
 {
-    "appName": {
+    "shortAppName": {
         "message": "Zapper!",
         "description": "The name of the app."
+    },
+    "appName": {
+        "message": "Zapper! – Remote control for LG smart TVs",
+        "description": "The title of the application, displayed in the web store."
+    },
+    "appDescription": {
+        "message": "With Zapper! you can easily control your LG smart TV.",
+        "description": "The description of the application, displayed in the web store."
     },
     "connecting": {
         "message": "Connecting …",

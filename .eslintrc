@@ -1,0 +1,16 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": false
+    },
+    "extends": "airbnb",
+    "rules": {
+        "indent": [2, 4]
+    },
+    "globals":{
+        "chrome": true,
+        "__DEV__": true,
+        "VERSION": true
+    }
+}
