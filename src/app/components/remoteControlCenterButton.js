@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 const RemoteControlCenterButton = class RemoteControlCenterButton extends Component {
     render() {
-        const buttonWrapperClassName = `button-wrapper ${this.props.type}-button`;
+        const disabled = this.props.disabled ? ' disabled' : '';
+        const buttonWrapperClassName = `button-wrapper ${this.props.type}-button${disabled}`;
         const buttonClassName = `button-center-${this.props.buttonType} button-${this.props.color}`;
 
         const buttonMarkup = (button, i) =>
@@ -30,6 +31,7 @@ const RemoteControlCenterButton = class RemoteControlCenterButton extends Compon
 
 RemoteControlCenterButton.propTypes = {
     type: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
     color: PropTypes.string.isRequired,
     buttonType: PropTypes.string.isRequired,
     labelText: PropTypes.string,

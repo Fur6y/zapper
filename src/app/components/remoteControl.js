@@ -49,6 +49,7 @@ const RemoteController = class RemoteController extends Component {
                     </div>
                     <div className="button-row">
                         <Button
+                          disabled
                           type="input"
                           buttonType="round"
                           color="white"
@@ -57,6 +58,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="settings"
                           buttonType="round"
                           color="white"
@@ -65,6 +67,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="info"
                           buttonType="round"
                           color="white"
@@ -73,6 +76,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="help"
                           buttonType="round"
                           color="white"
@@ -82,13 +86,15 @@ const RemoteController = class RemoteController extends Component {
                     </div>
                     <div className="button-row">
                         <Button
+                          disabled
                           type="num1"
                           buttonType="square"
                           color="white"
                           text="1"
-                          onClick={this.props.actions.test}
+                          onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="num2"
                           buttonType="square"
                           color="white"
@@ -96,6 +102,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="num3"
                           buttonType="square"
                           color="white"
@@ -105,6 +112,7 @@ const RemoteController = class RemoteController extends Component {
                     </div>
                     <div className="button-row">
                         <Button
+                          disabled
                           type="num4"
                           buttonType="square"
                           color="white"
@@ -112,6 +120,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="num5"
                           buttonType="square"
                           color="white"
@@ -119,6 +128,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="num6"
                           buttonType="square"
                           color="white"
@@ -128,6 +138,7 @@ const RemoteController = class RemoteController extends Component {
                     </div>
                     <div className="button-row">
                         <Button
+                          disabled
                           type="num7"
                           buttonType="square"
                           color="white"
@@ -135,6 +146,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="num8"
                           buttonType="square"
                           color="white"
@@ -142,6 +154,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="num9"
                           buttonType="square"
                           color="white"
@@ -151,6 +164,7 @@ const RemoteController = class RemoteController extends Component {
                     </div>
                     <div className="button-row">
                         <Button
+                          disabled
                           type="guide"
                           buttonType="square"
                           color="white"
@@ -158,6 +172,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="num0"
                           buttonType="square"
                           color="white"
@@ -165,6 +180,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="qview"
                           buttonType="square"
                           color="white"
@@ -188,6 +204,7 @@ const RemoteController = class RemoteController extends Component {
                         />
                         <div className="button-column">
                             <Button
+                              disabled
                               type="fav"
                               buttonType="square"
                               color="white"
@@ -226,6 +243,7 @@ const RemoteController = class RemoteController extends Component {
                     </div>
                     <div className="button-row">
                         <CenterButton
+                          disabled
                           type="center"
                           buttonType="square"
                           color="black"
@@ -288,6 +306,7 @@ const RemoteController = class RemoteController extends Component {
                     </div>
                     <div className="button-row">
                         <Button
+                          disabled
                           type="dot-one"
                           buttonType="square"
                           color="red"
@@ -295,6 +314,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="dot-two"
                           buttonType="square"
                           color="green"
@@ -302,6 +322,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="dot-three"
                           buttonType="square"
                           color="yellow"
@@ -309,6 +330,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="dot-four"
                           buttonType="square"
                           color="blue"
@@ -321,6 +343,7 @@ const RemoteController = class RemoteController extends Component {
                     </div>
                     <div className="button-row">
                         <Button
+                          disabled
                           type="text"
                           buttonType="square"
                           color="black"
@@ -329,6 +352,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="topt"
                           buttonType="square"
                           color="black"
@@ -336,6 +360,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="app2"
                           buttonType="square"
                           color="black"
@@ -382,6 +407,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.props.actions.mediaForward}
                         />
                         <Button
+                          disabled
                           type="rec"
                           buttonType="square"
                           color="black"
@@ -391,6 +417,7 @@ const RemoteController = class RemoteController extends Component {
                     </div>
                     <div className="button-row">
                         <Button
+                          disabled
                           type="subtitle"
                           buttonType="square"
                           color="black"
@@ -398,6 +425,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="ad"
                           buttonType="square"
                           color="black"
@@ -405,6 +433,7 @@ const RemoteController = class RemoteController extends Component {
                           onClick={this.onClick}
                         />
                         <Button
+                          disabled
                           type="radio"
                           buttonType="square"
                           color="black"
