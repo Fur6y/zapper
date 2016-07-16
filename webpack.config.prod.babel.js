@@ -19,7 +19,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
-      VERSION: JSON.stringify('0.1.0'),
+      VERSION: JSON.stringify('1.0.0'),
       __DEV__: JSON.stringify(false),
     }),
     new ExtractTextPlugin('[name].css'),
